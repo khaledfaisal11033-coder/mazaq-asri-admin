@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F9FAFC" />
+  <title>لوحة الإدارة · شركة المذاق العصري</title>
+  <meta name="description" content="لوحة الإدارة الداخلية لشركة المذاق العصري." />
+  <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Tajawal:wght@500;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./styles.css" />
+  <style>
+    .dash-shell {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      background: var(--surface-canvas);
+    }
+    .dash-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .dash-header__brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .dash-header__brand img {
+      width: 40px;
+      height: 40px;
+    }
+    .dash-header__title {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--text-ink);
+    }
+    .dash-header__subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    .dash-user {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .dash-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--surface-input);
+      color: var(--text-on-input);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-family: var(--font-heading);
+    }
+    .dash-user__name {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-ink);
+    }
+    .dash-user__role {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+    .dash-logout {
+      background: transparent;
+      border: 1px solid var(--border-soft);
+      color: var(--text-ink);
+      padding: 8px 14px;
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background var(--t-fast), border-color var(--t-fast);
+    }
+    .dash-logout:hover {
+      background: #FBFCFE;
+      border-color: var(--border-slate);
+    }
+    .dash-main {
+      flex: 1;
+      max-width: 1080px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 40px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .dash-welcome {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .dash-welcome h1 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 28px;
+      letter-spacing: -0.01em;
+      color: var(--text-ink);
+      margin: 0;
+    }
+    .dash-welcome p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+    .dash-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .stat-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-shadow: var(--shadow-card);
+    }
+    .stat-card__label {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .stat-card__value {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--text-ink);
+      letter-spacing: -0.01em;
+    }
+    .stat-card__hint {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+    .dash-section {
+      background: #FFFFFF;
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-card);
+    }
+    .dash-section h2 {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 18px;
+      margin: 0 0 12px 0;
+      color: var(--text-ink);
+    }
+    .dash-section p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+    .demo-banner {
+      background: linear-gradient(135deg, #FFF8E5 0%, #FFFEF5 100%);
+      border: 1px solid #F0D99E;
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      font-size: 12.5px;
+      color: #6B5320;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .demo-banner__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #D4A82A;
+    }
+  </style>
+</head>
+<body>
+  <div class="dash-shell">
+    <header class="dash-header">
+      <div class="dash-header__brand">
+        <img src="./logo.svg" alt="" />
+        <div>
+          <div class="dash-header__title">شركة المذاق العصري</div>
+          <div class="dash-header__subtitle">نظام الإدارة المالية</div>
+        </div>
+      </div>
+      <div class="dash-user">
+        <div class="dash-avatar" id="dash-avatar">م</div>
+        <div>
+          <div class="dash-user__name" id="dash-name">المستخدم</div>
+          <div class="dash-user__role" id="dash-role">مدير</div>
+        </div>
+        <button class="dash-logout" id="logout-btn" type="button">تسجيل الخروج</button>
+      </div>
+    </header>
+
+    <main class="dash-main">
+      <div class="demo-banner" id="demo-banner">
+        <span class="demo-banner__dot"></span>
+        <span>وضع تجريبي. هذه الصفحة للعرض فقط — اربط الـ API لاحقاً لإدارة حقيقية.</span>
+      </div>
+
+      <div class="dash-welcome">
+        <h1 id="welcome-title">مرحباً بك في لوحة الإدارة الداخلية</h1>
+        <p>تم تسجيل الدخول بنجاح. هذا نموذج أولي للوحة التحكم.</p>
+      </div>
+
+      <section class="dash-stats">
+        <div class="stat-card">
+          <div class="stat-card__label">الإيرادات اليوم</div>
+          <div class="stat-card__value" id="stat-revenue">— ر.س</div>
+          <div class="stat-card__hint">آخر تحديث: قبل قليل</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">الطلبات النشطة</div>
+          <div class="stat-card__value" id="stat-orders">0</div>
+          <div class="stat-card__hint">خلال الـ 24 ساعة الأخيرة</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">المصروفات</div>
+          <div class="stat-card__value" id="stat-expenses">— ر.س</div>
+          <div class="stat-card__hint">هذا الشهر</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__label">صافي الربح</div>
+          <div class="stat-card__value" id="stat-profit">— ر.س</div>
+          <div class="stat-card__hint">تقريبي</div>
+        </div>
+      </section>
+
+      <section class="dash-section">
+        <h2>الخطوات التالية</h2>
+        <p>
+          لوحة التحكم الفعلية ستأتي لاحقاً مع الـ backend. حالياً تتأكد أن:
+          (1) تسجيل الدخول يعمل، (2) الجلسة تُحفظ بشكل آمن، (3) التحويل بعد الدخول صحيح،
+          (4) تسجيل الخروج يُنهي الجلسة ويعود لصفحة الدخول.
+        </p>
+      </section>
+
+      <footer class="footer" role="contentinfo">
+        <div class="footer__inner">
+          <span class="footer__version">الإصدار <span id="app-version">v1.0.0</span></span>
+          <span class="footer__sep" aria-hidden="true">·</span>
+          <a class="footer__domain" href="https://modrtn-taste-company.pages.dev" target="_blank" rel="noopener">modrtn-taste-company.pages.dev</a>
+        </div>
+        <div class="footer__copy">© ٢٠٢٦ شركة المذاق العصري — جميع الحقوق محفوظة.</div>
+      </footer>
+    </main>
+  </div>
+
+  <script src="./config.js"></script>
+  <script>
+    (function () {
+      "use strict";
+
+      const cfg = window.APP_CONFIG || {};
+      const storage = cfg.storage || {};
+
+      // إخفاء البانر إذا لم يكن وضع Demo
+      const banner = document.getElementById("demo-banner");
+      if (banner && cfg.demo && cfg.demo.enabled === false) {
+        banner.style.display = "none";
+      }
+
+      // تحميل ملف المستخدم من localStorage
+      let profile = null;
+      try {
+        const raw = window.localStorage.getItem(storage.profileKey || "mazaq.profile");
+        if (raw) profile = JSON.parse(raw);
+      } catch (e) {
+        profile = null;
+      }
+
+      // إذا ما في جلسة، رجّعه لصفحة الدخول
+      const token = (() => {
+        try {
+          return window.localStorage.getItem(storage.sessionKey || "mazaq.session");
+        } catch (e) {
+          return null;
+        }
+      })();
+
+      if (!token) {
+        window.location.replace("./index.html");
+        return;
+      }
+
+      const nameEl = document.getElementById("dash-name");
+      const roleEl = document.getElementById("dash-role");
+      const avatarEl = document.getElementById("dash-avatar");
+      const welcomeEl = document.getElementById("welcome-title");
+
+      if (profile) {
+        if (profile.displayName && nameEl) nameEl.textContent = profile.displayName;
+        if (profile.role && roleEl) roleEl.textContent = profile.role;
+        if (profile.displayName && avatarEl) {
+          avatarEl.textContent = profile.displayName.charAt(0);
+        }
+        if (welcomeEl && profile.displayName) {
+          welcomeEl.textContent = "أهلاً، " + profile.displayName;
+        }
+      }
+
+      const versionEl = document.getElementById("app-version");
+      if (versionEl && cfg.ui && cfg.ui.version) {
+        versionEl.textContent = cfg.ui.version;
+      }
+
+      // تسجيل الخروج
+      const logoutBtn = document.getElementById("logout-btn");
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", () => {
+          try {
+            window.localStorage.removeItem(storage.sessionKey || "mazaq.session");
+            window.localStorage.removeItem(storage.profileKey || "mazaq.profile");
+          } catch (e) {
+            /* ignore */
+          }
+          window.location.replace("./index.html");
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

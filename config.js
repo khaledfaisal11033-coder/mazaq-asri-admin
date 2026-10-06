@@ -9,22 +9,36 @@ window.APP_CONFIG = Object.freeze({
     shortName: "المذاق العصري",
   },
 
-  // نقطة استدعاء الدخول إلى الـ API — ضع رابط الـ endpoint الخاص بك هنا
+  // ============================================================
+  // وضع الدخول — Demo Mode
+  // فعّل هذا الخيار للدخول التجريبي بدون backend
+  // ============================================================
+  demo: {
+    // true = أي دخول يمر محلياً عبر البيانات المعرّفة هنا
+    // false = يستخدم api.loginUrl لإجراء طلب حقيقي
+    enabled: true,
+    // بيانات الدخول المسموح بها (username:password)
+    credentials: [
+      { username: "1111", password: "1111", role: "مدير", displayName: "المدير العام" },
+    ],
+    // المدة (بالملي ثانية) قبل التحويل إلى لوحة التحكم بعد الدخول
+    redirectDelayMs: 700,
+  },
+
+  // ============================================================
+  // إعدادات الـ API الحقيقي (يُستخدم فقط عندما demo.enabled = false)
+  // ============================================================
   api: {
-    // مثال افتراضي — استبدله بالرابط الفعلي لـ backend الخاص بك
     loginUrl: "https://api.example.com/v1/auth/login",
     method: "POST",
-    // الحقول المرسلة في جسم الطلب
     payload: {
       username: "username",
       password: "password",
     },
-    // رؤوس إضافية تُرسل مع كل طلب
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
     },
-    // مهلة الانتظار قبل إلغاء الطلب
     timeoutMs: 12000,
   },
 
@@ -32,18 +46,15 @@ window.APP_CONFIG = Object.freeze({
   storage: {
     rememberKey: "mazaq.remember",
     sessionKey: "mazaq.session",
+    profileKey: "mazaq.profile",
   },
 
   // بيانات العرض
   ui: {
-    // الإصدار الظاهر في الفوتر
     version: "v1.0.0",
-    // الدومين المعروض في الفوتر
     domain: "alkukh-mateam.workers.dev",
-    // اسم جهة حقوق الملكية
     copyrightHolder: "شركة المذاق العصري",
     copyrightYear: 2026,
-    // بريد المدير لطلب بيانات الدخول
     managerEmail: "manager@mazaq-asri.example",
   },
 });
