@@ -1,0 +1,21 @@
+{
+  "name": "mazaq-asri-admin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "لوحة الإدارة الداخلية لشركة المذاق العصري - صفحة دخول عربية Static",
+  "scripts": {
+    "dev": "python3 -m http.server 8080",
+    "start": "python3 -m http.server 8080",
+    "deploy:cloudflare": "wrangler pages deploy . --project-name=modrtn-taste-company",
+    "deploy:cloudflare:dry": "wrangler pages deploy . --project-name=modrtn-taste-company --dry-run"
+  },
+  "keywords": [
+    "arabic",
+    "login",
+    "admin",
+    "cloudflare-pages",
+    "static-site"
+  ],
+  "author": "شركة المذاق العصري",
+  "license": "UNLICENSED"
+}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="شعار شركة المذاق العصري">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#151A29"/>
+      <stop offset="100%" stop-color="#232838"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
+  <!-- قطرة / ورقة تمثل "المذاق العصري" -->
+  <path d="M32 14
+           C 22 24, 18 32, 18 40
+           a 14 14 0 0 0 28 0
+           C 46 32, 42 24, 32 14 Z"
+        fill="none" stroke="#F4F5F9" stroke-width="2.4" stroke-linejoin="round"/>
+  <!-- خط فاصل رفيع -->
+  <line x1="22" y1="40" x2="42" y2="40" stroke="#F4F5F9" stroke-width="1.6" stroke-linecap="round" opacity="0.55"/>
+</svg>
