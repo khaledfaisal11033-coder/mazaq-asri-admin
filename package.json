@@ -17,5 +17,8 @@
     "static-site"
   ],
   "author": "شركة المذاق العصري",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "wrangler": "^4.147.0"
+  }
 }
