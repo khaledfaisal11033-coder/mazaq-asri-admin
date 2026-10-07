@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>التقرير اليومي · شركة المذاق العصري</title>
+  <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./dashboard.css" />
+  <style>
+    .branch-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: var(--space-4);
+    }
+    .branch-tab {
+      padding: 10px 18px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+    }
+    .branch-tab:hover {
+      border-color: var(--text-ink);
+      color: var(--text-ink);
+    }
+    .branch-tab.is-active {
+      background: var(--text-ink);
+      color: #FFFFFF;
+      border-color: var(--text-ink);
+    }
+
+    /* Excel-style table */
+    .excel-table-wrap {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--border-card);
+      box-shadow: var(--shadow-card);
+    }
+    .excel-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: "Cairo", sans-serif;
+    }
+    .excel-table th {
+      background: var(--text-ink);
+      color: #FFFFFF;
+      padding: 14px 16px;
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 13px;
+      text-align: center;
+      white-space: nowrap;
+      border: 1px solid var(--text-ink);
+    }
+    .excel-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border-soft);
+      border-left: 1px solid var(--border-soft);
+      border-right: 1px solid var(--border-soft);
+      font-size: 13px;
+      text-align: center;
+    }
+    .excel-table tr:nth-child(even) td {
+      background: var(--surface-canvas);
+    }
+    .excel-table tr:hover td {
+      background: rgba(21, 26, 41, 0.04);
+    }
+    .excel-table .num {
+      font-family: var(--font-heading);
+      font-weight: 600;
+      direction: ltr;
+      unicode-bidi: embed;
+    }
+    .excel-table tfoot td {
+      background: var(--text-ink) !important;
+      color: #FFFFFF;
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 14px;
+      padding: 16px;
+      border-color: var(--text-ink);
+    }
+
+    /* Highlight cash column */
+    .excel-table .col-cash { background: rgba(30, 122, 77, 0.04); }
+    .excel-table .col-network { background: rgba(42, 93, 165, 0.04); }
+    .excel-table .col-out { background: rgba(176, 74, 74, 0.04); }
+    .excel-table tfoot .col-cash,
+    .excel-table tfoot .col-network,
+    .excel-table tfoot .col-out { background: var(--text-ink) !important; }
+
+    /* Quick stats above table */
+    .quick-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+    .quick-stat {
+      background: #FFFFFF;
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      box-shadow: var(--shadow-card);
+    }
+    .quick-stat__label {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .quick-stat__value {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--text-ink);
+      margin-top: 4px;
+      direction: ltr;
+      unicode-bidi: embed;
+      text-align: right;
+    }
+    .quick-stat--cash .quick-stat__value { color: var(--accent-success); }
+    .quick-stat--network .quick-stat__value { color: var(--accent-info); }
+    .quick-stat--out .quick-stat__value { color: var(--accent-danger); }
+  </style>
+</head>
+<body>
+  <div class="sidebar-backdrop"></div>
+  <div class="admin-shell">
+    <aside class="sidebar">
+      <div class="sidebar__brand">
+        <img src="./logo.svg" alt="" />
+        <div class="sidebar__brand-text">
+          <span class="sidebar__brand-title">المذاق العصري</span>
+          <span class="sidebar__brand-subtitle">المحاسبة المالية</span>
+        </div>
+      </div>
+      <div class="sidebar__section">
+        <div class="sidebar__heading">المحاسبة المالية</div>
+        <ul class="sidebar__nav">
+          <li><a class="nav-item" href="./branches.html" data-nav="branches.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1-5h16l1 5"/><path d="M5 9v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9"/><path d="M3 9h18"/><path d="M9 21V13h6v8"/></svg>المحلات</a></li>
+          <li><a class="nav-item" href="./closing.html" data-nav="closing.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>الإقفال والورديات</a></li>
+          <li><a class="nav-item" href="./daily.html" data-nav="daily.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>التقرير اليومي</a></li>
+          <li><a class="nav-item" href="./reports.html" data-nav="reports.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>المالية والتقارير</a></li>
+        </ul>
+      </div>
+      <div class="sidebar__section">
+        <div class="sidebar__heading">النظام</div>
+        <ul class="sidebar__nav">
+          <li><a class="nav-item" href="./settings.html" data-nav="settings.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>الإعدادات</a></li>
+        </ul>
+      </div>
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" data-user-avatar>م</div>
+          <div class="sidebar__user-info">
+            <div class="sidebar__user-name" data-user-name>المستخدم</div>
+            <div class="sidebar__user-role" data-user-role>مدير</div>
+          </div>
+          <button class="sidebar__logout" data-action="logout" title="تسجيل الخروج"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></button>
+        </div>
+      </div>
+    </aside>
+
+    <header class="topbar">
+      <button class="topbar__menu-btn" data-action="toggle-menu" aria-label="القائمة">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div>
+        <h1 class="topbar__page-title">التقرير اليومي</h1>
+        <div class="topbar__page-subtitle">كاش، شبكة، خرج لكل فرع — مجدول يوم بيوم</div>
+      </div>
+      <div class="topbar__actions">
+        <select class="select" id="filter-period">
+          <option value="2026-10">أكتوبر ٢٠٢٦</option>
+          <option value="2026-09">سبتمبر ٢٠٢٦</option>
+          <option value="2026-08">أغسطس ٢٠٢٦</option>
+        </select>
+        <button class="btn btn--secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>تصدير</button>
+        <button class="btn btn--primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>يوم جديد</button>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="branch-tabs" id="branch-tabs"></div>
+
+      <div class="quick-stats" id="quick-stats"></div>
+
+      <div class="excel-table-wrap">
+        <table class="excel-table" id="daily-table">
+          <thead>
+            <tr>
+              <th>التاريخ</th>
+              <th>اليوم</th>
+              <th>كاش ((٢)</th>
+              <th>شبكة ((٢)</th>
+              <th>وصف الخروج</th>
+              <th>المبلغ</th>
+            </tr>
+          </thead>
+          <tbody id="daily-tbody"></tbody>
+          <tfoot id="daily-tfoot">
+            <tr>
+              <td colspan="2">الإجمالي</td>
+              <td class="num col-cash" id="total-cash">—</td>
+              <td class="num col-network" id="total-network">—</td>
+              <td class="col-out">—</td>
+              <td class="num col-out" id="total-out">—</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <footer class="footer">
+        <div class="footer__inner">
+          <span class="footer__version">الإصدار <span id="app-version">v1.0.0</span></span>
+          <span class="footer__sep">·</span>
+          <a class="footer__domain" href="https://modrtn-taste-company.pages.dev" target="_blank" rel="noopener">modrtn-taste-company.pages.dev</a>
+        </div>
+        <div class="footer__copy">© ٢٠٢٦ شركة المذاق العصري — جميع الحقوق محفوظة.</div>
+      </footer>
+    </main>
+  </div>
+
+  <script src="./config.js"></script>
+  <script src="./mock-data.js"></script>
+  <script src="./dashboard.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      const data = window.MOCK_DATA;
+      const ui = window.UI;
+      const branches = data.branches;
+      const dailyData = data.dailyFinancials || [];
+
+      function branchName(id) { return branches.find((b) => b.id === id)?.name || "—"; }
+
+      let currentBranchId = branches[0]?.id;
+
+      // بناء تبويبات الفروع
+      const tabsEl = document.getElementById("branch-tabs");
+      tabsEl.innerHTML = [
+        { id: "all", name: "كل الفروع" },
+        ...branches
+      ].map((b) => `<button class="branch-tab ${b.id === currentBranchId ? "is-active" : ""}" data-branch="${b.id}">${b.name}</button>`).join("");
+
+      tabsEl.querySelectorAll(".branch-tab").forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tabsEl.querySelectorAll(".branch-tab").forEach((t) => t.classList.remove("is-active"));
+          tab.classList.add("is-active");
+          currentBranchId = tab.dataset.branch === "all" ? "all" : parseInt(tab.dataset.branch, 10);
+          render();
+        });
+      });
+
+      function getFiltered() {
+        if (currentBranchId === "all") return dailyData;
+        return dailyData.filter((d) => d.branchId === currentBranchId);
+      }
+
+      function formatNum(n) {
+        return (Number(n) || 0).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
+
+      function render() {
+        const rows = getFiltered();
+        const tbody = document.getElementById("daily-tbody");
+
+        if (rows.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 32px; color: var(--text-muted)">لا توجد سجلات لهذا الفرع</td></tr>`;
+        } else {
+          tbody.innerHTML = rows.map((r) => `
+            <tr>
+              <td class="num">${r.date}</td>
+              <td>${r.day}</td>
+              <td class="num col-cash">${formatNum(r.cash)}</td>
+              <td class="num col-network">${formatNum(r.network)}</td>
+              <td>${r.outDescription || "—"}</td>
+              <td class="num col-out">${formatNum(r.outAmount)}</td>
+            </tr>
+          `).join("");
+        }
+
+        // الإجماليات
+        const totalCash = rows.reduce((s, r) => s + r.cash, 0);
+        const totalNetwork = rows.reduce((s, r) => s + r.network, 0);
+        const totalOut = rows.reduce((s, r) => s + r.outAmount, 0);
+
+        document.getElementById("total-cash").textContent = formatNum(totalCash) + " ر.س";
+        document.getElementById("total-network").textContent = formatNum(totalNetwork) + " ر.س";
+        document.getElementById("total-out").textContent = formatNum(totalOut) + " ر.س";
+
+        // إحصائيات سريعة
+        document.getElementById("quick-stats").innerHTML = `
+          <div class="quick-stat quick-stat--cash">
+            <div class="quick-stat__label">إجمالي الكاش</div>
+            <div class="quick-stat__value">${formatNum(totalCash)} ر.س</div>
+          </div>
+          <div class="quick-stat quick-stat--network">
+            <div class="quick-stat__label">إجمالي الشبكة</div>
+            <div class="quick-stat__value">${formatNum(totalNetwork)} ر.س</div>
+          </div>
+          <div class="quick-stat quick-stat--out">
+            <div class="quick-stat__label">إجمالي الخرج</div>
+            <div class="quick-stat__value">${formatNum(totalOut)} ر.س</div>
+          </div>
+          <div class="quick-stat">
+            <div class="quick-stat__label">صافي (كاش + شبكة - خرج)</div>
+            <div class="quick-stat__value">${formatNum(totalCash + totalNetwork - totalOut)} ر.س</div>
+          </div>
+        `;
+      }
+
+      render();
+    })();
+  </script>
+</body>
+</html>

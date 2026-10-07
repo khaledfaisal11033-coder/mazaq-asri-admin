@@ -112,4 +112,34 @@ window.MOCK_DATA = Object.freeze({
       autoBackup: true,
     },
   },
+
+  /* التقرير اليومي لكل فرع (مثل ورقة الإكسل) */
+  dailyFinancials: [
+    // فرع العليا (branchId: 1)
+    { id: 1, branchId: 1, date: "2026-10-01", day: "الأربعاء", cash: 160.00, network: 348.00, outDescription: "حريف + ماء", outAmount: 74.00 },
+    { id: 2, branchId: 1, date: "2026-10-02", day: "الخميس", cash: 145.00, network: 472.00, outDescription: "حريف", outAmount: 69.00 },
+    { id: 3, branchId: 1, date: "2026-10-03", day: "الجمعة", cash: 340.00, network: 452.00, outDescription: "حريف", outAmount: 81.00 },
+    { id: 4, branchId: 1, date: "2026-10-04", day: "السبت", cash: 405.00, network: 353.00, outDescription: "حريف", outAmount: 156.00 },
+    { id: 5, branchId: 1, date: "2026-10-05", day: "الأحد", cash: 100.00, network: 313.00, outDescription: "حريف", outAmount: 54.00 },
+    { id: 6, branchId: 1, date: "2026-10-06", day: "الإثنين", cash: 400.00, network: 515.00, outDescription: "حريف", outAmount: 123.00 },
+    { id: 7, branchId: 1, date: "2026-10-07", day: "الثلاثاء", cash: 350.00, network: 330.00, outDescription: "حريف", outAmount: 76.00 },
+
+    // فرع الملز (branchId: 2)
+    { id: 8, branchId: 2, date: "2026-10-01", day: "الأربعاء", cash: 245.00, network: 30.00, outDescription: "حريف", outAmount: 25.00 },
+    { id: 9, branchId: 2, date: "2026-10-02", day: "الخميس", cash: 230.00, network: 371.00, outDescription: "حريف + ماء", outAmount: 98.00 },
+    { id: 10, branchId: 2, date: "2026-10-03", day: "الجمعة", cash: 490.00, network: 300.00, outDescription: "حريف", outAmount: 117.00 },
+    { id: 11, branchId: 2, date: "2026-10-04", day: "السبت", cash: 400.00, network: 344.00, outDescription: "حريف", outAmount: 81.00 },
+    { id: 12, branchId: 2, date: "2026-10-05", day: "الأحد", cash: 255.00, network: 332.00, outDescription: "حريف", outAmount: 132.00 },
+    { id: 13, branchId: 2, date: "2026-10-06", day: "الإثنين", cash: 305.00, network: 313.00, outDescription: "حريف + ماء", outAmount: 99.00 },
+    { id: 14, branchId: 2, date: "2026-10-07", day: "الثلاثاء", cash: 345.00, network: 391.00, outDescription: "حريف", outAmount: 62.00 },
+
+    // فرع جدة (branchId: 3)
+    { id: 15, branchId: 3, date: "2026-10-01", day: "الأربعاء", cash: 255.00, network: 723.00, outDescription: "حريف", outAmount: 16.00 },
+    { id: 16, branchId: 3, date: "2026-10-02", day: "الخميس", cash: 135.00, network: 291.00, outDescription: "حريف", outAmount: 0.00 },
+    { id: 17, branchId: 3, date: "2026-10-03", day: "الجمعة", cash: 200.00, network: 285.00, outDescription: "حريف", outAmount: 173.00 },
+    { id: 18, branchId: 3, date: "2026-10-04", day: "السبت", cash: 418.00, network: 338.00, outDescription: "حريف", outAmount: 37.00 },
+    { id: 19, branchId: 3, date: "2026-10-05", day: "الأحد", cash: 200.00, network: 360.00, outDescription: "حريف", outAmount: 2009.00 },
+    { id: 20, branchId: 3, date: "2026-10-06", day: "الإثنين", cash: 215.00, network: 215.00, outDescription: "حريف", outAmount: 0.00 },
+    { id: 21, branchId: 3, date: "2026-10-07", day: "الثلاثاء", cash: 240.00, network: 105.00, outDescription: "حريف", outAmount: 78.00 },
+  ],
 });
