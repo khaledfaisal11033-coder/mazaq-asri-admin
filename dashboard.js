@@ -79,20 +79,7 @@
 
   /* ---------- إضافة رابط "الإقفال والورديات" إذا غير موجود ---------- */
   function injectClosingNav() {
-    if (document.querySelector('[data-nav="closing.html"]')) return;
-    const staffLink = document.querySelector('[data-nav="staff.html"]');
-    if (!staffLink) return;
-    const li = staffLink.parentElement; // <li> الذي يحتوي staff
-    if (!li || !li.parentElement) return;
-    const closingLi = document.createElement("li");
-    closingLi.innerHTML =
-      '<a class="nav-item" href="./closing.html" data-nav="closing.html">' +
-      '<svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' +
-      '<rect x="2" y="3" width="20" height="14" rx="2"/>' +
-      '<line x1="8" y1="21" x2="16" y2="21"/>' +
-      '<line x1="12" y1="17" x2="12" y2="21"/>' +
-      '</svg>الإقفال والورديات</a>';
-    li.parentElement.insertBefore(closingLi, li.nextSibling);
+    // تم تعطيل الحقن التلقائي — الصفحة الوحيدة في القائمة هي closing
   }
 
   /* ---------- قائمة الجوال ---------- */

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>المالية والتقارير · شركة المذاق العصري</title>
+  <title>التقارير المالية · شركة المذاق العصري</title>
   <link rel="icon" type="image/svg+xml" href="./logo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,18 +19,14 @@
         <img src="./logo.svg" alt="" />
         <div class="sidebar__brand-text">
           <span class="sidebar__brand-title">المذاق العصري</span>
-          <span class="sidebar__brand-subtitle">لوحة الإدارة</span>
+          <span class="sidebar__brand-subtitle">المحاسبة المالية</span>
         </div>
       </div>
       <div class="sidebar__section">
-        <div class="sidebar__heading">القائمة الرئيسية</div>
+        <div class="sidebar__heading">المحاسبة المالية</div>
         <ul class="sidebar__nav">
-          <li><a class="nav-item" href="./dashboard.html" data-nav="dashboard.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>لوحة التحكم</a></li>
-          <li><a class="nav-item" href="./orders.html" data-nav="orders.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>الطلبات</a></li>
+          <li><a class="nav-item" href="./closing.html" data-nav="closing.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>الإقفال والورديات</a></li>
           <li><a class="nav-item" href="./reports.html" data-nav="reports.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>المالية والتقارير</a></li>
-          <li><a class="nav-item" href="./menu.html" data-nav="menu.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg>المنيو</a></li>
-          <li><a class="nav-item" href="./inventory.html" data-nav="inventory.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>المخزون</a></li>
-          <li><a class="nav-item" href="./staff.html" data-nav="staff.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>الموظفين</a></li>
         </ul>
       </div>
       <div class="sidebar__section">
@@ -56,96 +52,143 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
       <div>
-        <h1 class="topbar__page-title">المالية والتقارير</h1>
-        <div class="topbar__page-subtitle">إيرادات، مصروفات، وأرباح المطعم</div>
-      </div>
-      <div class="topbar__search">
-        <svg class="topbar__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="search" placeholder="ابحث في التقارير…" />
+        <h1 class="topbar__page-title">التقارير المالية</h1>
+        <div class="topbar__page-subtitle">ملخص الإيرادات والمصاريف والخزينة لكل فرع</div>
       </div>
       <div class="topbar__actions">
-        <button class="btn btn--secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>تصدير PDF</button>
+        <select class="select" id="filter-period">
+          <option value="all">كل الفترات</option>
+          <option value="2026-10-07">اليوم</option>
+          <option value="2026-10-06">الأمس</option>
+        </select>
+        <button class="btn btn--secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>تصدير</button>
       </div>
     </header>
 
     <main class="main">
-      <section class="main__header">
-        <div>
-          <h2 class="main__title">الأداء المالي</h2>
-          <p class="main__subtitle">ملخص الإيرادات والمصاريف والأرباح للفترة الحالية</p>
+      <div class="treasury-banner">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div class="treasury-banner__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="6" width="20" height="12" rx="2"/>
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M6 12h.01M18 12h.01"/>
+            </svg>
+          </div>
+          <div>
+            <div class="treasury-banner__label">إجمالي الكاش في الخزينة المركزية</div>
+            <div class="treasury-banner__value" data-bind="treasury-total">—</div>
+            <div class="treasury-banner__hint">مجمّع من <span data-bind="branch-count">—</span> فروع</div>
+          </div>
         </div>
-        <div class="main__actions">
-          <select class="select"><option>أكتوبر ٢٠٢٦</option><option>سبتمبر ٢٠٢٦</option><option>أغسطس ٢٠٢٦</option></select>
+        <div style="text-align: end;">
+          <div style="font-size: 12px; opacity: 0.8;">صافي الأرباح</div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 22px;" data-bind="net-profit">—</div>
         </div>
-      </section>
+      </div>
 
       <section class="stats">
         <article class="stat-card">
-          <div class="stat-card__label">إجمالي الإيرادات</div>
-          <div class="stat-card__value" data-bind="total-revenue">—</div>
-          <div class="stat-card__hint"><span class="stat-card__delta stat-card__delta--up">▲ ١٢.٤%</span> عن الشهر السابق</div>
+          <div class="stat-card__label">إجمالي الكاش المحصّل</div>
+          <div class="stat-card__value" data-bind="total-cash">—</div>
+          <div class="stat-card__hint">من إقفالات الورديات</div>
         </article>
         <article class="stat-card">
-          <div class="stat-card__label">إجمالي المصروفات</div>
-          <div class="stat-card__value" data-bind="total-expenses">—</div>
-          <div class="stat-card__hint"><span class="stat-card__delta stat-card__delta--down">▼ ٣.٢%</span> عن الشهر السابق</div>
+          <div class="stat-card__label">إجمالي الشبكة</div>
+          <div class="stat-card__value" data-bind="total-network">—</div>
+          <div class="stat-card__hint">لكل الفروع</div>
         </article>
         <article class="stat-card">
-          <div class="stat-card__label">صافي الربح</div>
-          <div class="stat-card__value" data-bind="net-profit">—</div>
-          <div class="stat-card__hint"><span class="stat-card__delta stat-card__delta--up">▲ ١٨.٦%</span> تحسن ملحوظ</div>
+          <div class="stat-card__label">إجمالي الخرج</div>
+          <div class="stat-card__value" data-bind="total-out" style="color: var(--accent-danger);">—</div>
+          <div class="stat-card__hint">مصاريف تشغيلية</div>
         </article>
         <article class="stat-card">
-          <div class="stat-card__label">هامش الربح</div>
-          <div class="stat-card__value" data-bind="profit-margin">—</div>
-          <div class="stat-card__hint"><span class="stat-card__delta stat-card__delta--neutral">— ثابت</span> عن الشهر السابق</div>
+          <div class="stat-card__label">عُهد تحت اليد</div>
+          <div class="stat-card__value" data-bind="total-custody">—</div>
+          <div class="stat-card__hint">عُهد نشطة</div>
         </article>
       </section>
 
-      <section class="card">
-        <div class="card__header">
-          <div>
-            <h3 class="card__title">الإيرادات الشهرية</h3>
-            <p class="card__subtitle">مقارنة المبيعات خلال آخر ٦ أشهر</p>
-          </div>
-        </div>
-        <div class="card__body">
-          <div class="chart" id="monthly-chart"></div>
-        </div>
-      </section>
-
-      <section class="grid grid--2" style="margin-top: var(--space-4);">
+      <section class="grid grid--2">
         <div class="card">
           <div class="card__header">
             <div>
-              <h3 class="card__title">توزيع فئات الإيراد</h3>
-              <p class="card__subtitle">حسب فئة المنتج</p>
+              <h3 class="card__title">الأداء حسب الفرع</h3>
+              <p class="card__subtitle">كاش، شبكة، خرج لكل فرع</p>
             </div>
-          </div>
-          <div class="card__body" id="category-breakdown">
-            <p style="color: var(--text-muted);">جاري التحميل…</p>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card__header">
-            <div>
-              <h3 class="card__title">آخر المعاملات</h3>
-              <p class="card__subtitle">إيرادات ومصروفات حديثة</p>
-            </div>
-            <a class="btn btn--ghost btn--sm" href="#">عرض الكل ←</a>
           </div>
           <div class="card__body card__body--flush">
             <div class="table-wrap">
               <table class="table">
                 <thead>
-                  <tr><th>التاريخ</th><th>النوع</th><th>الوصف</th><th>المبلغ</th></tr>
+                  <tr>
+                    <th>الفرع</th>
+                    <th>المدير</th>
+                    <th>كاش</th>
+                    <th>شبكة</th>
+                    <th>خرج</th>
+                    <th>عُهد</th>
+                  </tr>
                 </thead>
-                <tbody id="transactions-tbody">
+                <tbody id="branches-tbody">
+                  <tr><td colspan="6" style="text-align:center; padding: 32px; color: var(--text-muted)">جاري التحميل…</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card__header">
+            <div>
+              <h3 class="card__title">آخر إيداعات الخزينة</h3>
+              <p class="card__subtitle">كاش محوّل من الفروع</p>
+            </div>
+            <a class="btn btn--ghost btn--sm" href="./closing.html">عرض الكل ←</a>
+          </div>
+          <div class="card__body card__body--flush">
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr><th>التاريخ</th><th>الفرع</th><th>المبلغ</th><th>المصدر</th></tr>
+                </thead>
+                <tbody id="treasury-tbody">
                   <tr><td colspan="4" style="text-align:center; padding: 24px; color: var(--text-muted)">جاري التحميل…</td></tr>
                 </tbody>
               </table>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" style="margin-top: var(--space-4);">
+        <div class="card__header">
+          <div>
+            <h3 class="card__title">سجل الإقفالات التفصيلي</h3>
+            <p class="card__subtitle">جميع إقفالات الورديات</p>
+          </div>
+        </div>
+        <div class="card__body card__body--flush">
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>التاريخ</th>
+                  <th>الفرع</th>
+                  <th>الوردية</th>
+                  <th>كاش</th>
+                  <th>شبكة</th>
+                  <th>خرج</th>
+                  <th>عهدة مستخدمة</th>
+                  <th>المحول للخزينة</th>
+                  <th>الفرق</th>
+                </tr>
+              </thead>
+              <tbody id="closings-tbody">
+                <tr><td colspan="9" style="text-align:center; padding: 32px; color: var(--text-muted)">جاري التحميل…</td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
@@ -169,46 +212,69 @@
       "use strict";
       const data = window.MOCK_DATA;
       const ui = window.UI;
+      const closings = data.closings;
+      const treasury = data.treasuryMovements;
+      const branches = data.branches;
+      const custody = data.custodyRecords;
 
-      const transactions = data.transactions;
-      const revenue = transactions.filter((t) => t.type === "إيراد").reduce((s, t) => s + t.amount, 0);
-      const expenses = transactions.filter((t) => t.type === "مصروف").reduce((s, t) => s + Math.abs(t.amount), 0);
-      const netProfit = revenue - expenses;
-      const margin = revenue > 0 ? ((netProfit / revenue) * 100).toFixed(1) : 0;
+      function branchName(id) { return branches.find((b) => b.id === id)?.name || "—"; }
 
-      document.querySelector("[data-bind='total-revenue']").textContent = ui.formatCurrency(revenue, 'ر.س');
-      document.querySelector("[data-bind='total-expenses']").textContent = ui.formatCurrency(expenses, 'ر.س');
-      document.querySelector("[data-bind='net-profit']").textContent = ui.formatCurrency(netProfit, 'ر.س');
-      document.querySelector("[data-bind='profit-margin']").textContent = `${margin}%`;
+      const totalCash = closings.reduce((s, c) => s + c.cashSales, 0);
+      const totalNetwork = closings.reduce((s, c) => s + c.networkSales, 0);
+      const totalOut = closings.reduce((s, c) => s + c.cashOut, 0);
+      const treasuryTotal = treasury.reduce((s, t) => s + t.amount, 0);
+      const totalCustody = custody.reduce((s, c) => s + c.amount, 0);
+      const netProfit = totalCash + totalNetwork - totalOut;
 
-      // Monthly chart
-      const monthly = data.monthlySales;
-      const monthlyMax = Math.max(...monthly.revenue);
-      document.getElementById("monthly-chart").innerHTML = monthly.labels.map((label, i) => {
-        const val = monthly.revenue[i];
-        return `<div class="chart__bar" style="height: ${(val / monthlyMax) * 100}%" data-label="${label}" title="${label}: ${ui.formatCurrency(val, 'ر.س')}"></div>`;
+      document.querySelector("[data-bind='treasury-total']").textContent = ui.formatCurrency(treasuryTotal, "ر.س");
+      document.querySelector("[data-bind='branch-count']").textContent = ui.formatNumber(branches.length);
+      document.querySelector("[data-bind='net-profit']").textContent = ui.formatCurrency(netProfit, "ر.س");
+      document.querySelector("[data-bind='total-cash']").textContent = ui.formatCurrency(totalCash, "ر.س");
+      document.querySelector("[data-bind='total-network']").textContent = ui.formatCurrency(totalNetwork, "ر.س");
+      document.querySelector("[data-bind='total-out']").textContent = ui.formatCurrency(totalOut, "ر.س");
+      document.querySelector("[data-bind='total-custody']").textContent = ui.formatCurrency(totalCustody, "ر.س");
+
+      // ملخص حسب الفرع
+      document.getElementById("branches-tbody").innerHTML = branches.map((b) => {
+        const branchClosings = closings.filter((c) => c.branchId === b.id);
+        const cash = branchClosings.reduce((s, c) => s + c.cashSales, 0);
+        const network = branchClosings.reduce((s, c) => s + c.networkSales, 0);
+        const out = branchClosings.reduce((s, c) => s + c.cashOut, 0);
+        const cust = custody.filter((c) => c.branchId === b.id).reduce((s, c) => s + c.amount, 0);
+        return `
+          <tr>
+            <td><div class="table__primary">${b.name}</div><div class="table__secondary">${b.location}</div></td>
+            <td>${b.manager}</td>
+            <td><div class="table__primary">${ui.formatCurrency(cash, "ر.س")}</div></td>
+            <td>${ui.formatCurrency(network, "ر.س")}</td>
+            <td style="color: var(--accent-danger);">${ui.formatCurrency(out, "ر.س")}</td>
+            <td>${ui.formatCurrency(cust, "ر.س")}</td>
+          </tr>
+        `;
       }).join("");
 
-      // Category breakdown
-      document.getElementById("category-breakdown").innerHTML = data.categoryBreakdown.map((c) => `
-        <div style="margin-bottom: 14px;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-            <span style="font-size: 13px; color: var(--text-ink); font-weight: 500;">${c.name}</span>
-            <span style="font-size: 13px; color: var(--text-ink); font-family: var(--font-heading); font-weight: 700;">${c.value}%</span>
-          </div>
-          <div class="progress">
-            <div class="progress__fill" style="width: ${c.value}%; background: ${c.color};"></div>
-          </div>
-        </div>
-      `).join("");
-
-      // Transactions table
-      document.getElementById("transactions-tbody").innerHTML = transactions.map((t) => `
+      // إيداعات الخزينة
+      document.getElementById("treasury-tbody").innerHTML = treasury.slice(0, 6).map((t) => `
         <tr>
           <td>${t.date}</td>
-          <td><span class="badge ${t.type === 'إيراد' ? 'badge--success' : 'badge--danger'}"><span class="badge__dot"></span>${t.type}</span></td>
-          <td>${t.description}</td>
-          <td style="font-family: var(--font-heading); font-weight: 700; color: ${t.amount > 0 ? 'var(--accent-success)' : 'var(--accent-danger)'};">${ui.formatCurrency(t.amount, 'ر.س')}</td>
+          <td>${branchName(t.branchId)}</td>
+          <td><div class="table__primary">${ui.formatCurrency(t.amount, "ر.س")}</div></td>
+          <td>${t.source}</td>
+        </tr>
+      `).join("");
+
+      // سجل الإقفالات
+      document.getElementById("closings-tbody").innerHTML = closings.map((c) => `
+        <tr>
+          <td>${c.date}<div class="table__secondary">${c.closedAt}</div></td>
+          <td>${branchName(c.branchId)}</td>
+          <td>${c.shiftType}</td>
+          <td>${ui.formatCurrency(c.cashSales, "ر.س")}</td>
+          <td>${ui.formatCurrency(c.networkSales, "ر.س")}</td>
+          <td style="color: var(--accent-danger);">${ui.formatCurrency(c.cashOut, "ر.س")}</td>
+          <td>${ui.formatCurrency(c.custodyUsed, "ر.س")}</td>
+          <td><div class="table__primary">${ui.formatCurrency(c.transferredToTreasury, "ر.س")}</div></td>
+          <td>${c.difference === 0 ? '<span class="badge badge--success"><span class="badge__dot"></span>مطابق</span>' : c.difference > 0 ? `<span class="badge badge--info">+${ui.formatCurrency(c.difference, "ر.س")}</span>` : `<span class="badge badge--warning">${ui.formatCurrency(c.difference, "ر.س")}</span>`}</td>
         </tr>
       `).join("");
     })();

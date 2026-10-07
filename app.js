@@ -123,7 +123,7 @@
       showAlert("تم تسجيل الدخول بنجاح. جاري التحويل…", "success");
 
       const redirectUrl =
-        (result && (result.redirect || result.redirectUrl)) || "./dashboard.html";
+        (result && (result.redirect || result.redirectUrl)) || "./closing.html";
       setTimeout(() => {
         window.location.assign(redirectUrl);
       }, demoCfg.redirectDelayMs || 700);

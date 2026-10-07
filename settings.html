@@ -81,18 +81,14 @@
         <img src="./logo.svg" alt="" />
         <div class="sidebar__brand-text">
           <span class="sidebar__brand-title">المذاق العصري</span>
-          <span class="sidebar__brand-subtitle">لوحة الإدارة</span>
+          <span class="sidebar__brand-subtitle">المحاسبة المالية</span>
         </div>
       </div>
       <div class="sidebar__section">
-        <div class="sidebar__heading">القائمة الرئيسية</div>
+        <div class="sidebar__heading">المحاسبة المالية</div>
         <ul class="sidebar__nav">
-          <li><a class="nav-item" href="./dashboard.html" data-nav="dashboard.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>لوحة التحكم</a></li>
-          <li><a class="nav-item" href="./orders.html" data-nav="orders.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>الطلبات</a></li>
+          <li><a class="nav-item" href="./closing.html" data-nav="closing.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>الإقفال والورديات</a></li>
           <li><a class="nav-item" href="./reports.html" data-nav="reports.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>المالية والتقارير</a></li>
-          <li><a class="nav-item" href="./menu.html" data-nav="menu.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg>المنيو</a></li>
-          <li><a class="nav-item" href="./inventory.html" data-nav="inventory.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>المخزون</a></li>
-          <li><a class="nav-item" href="./staff.html" data-nav="staff.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>الموظفين</a></li>
         </ul>
       </div>
       <div class="sidebar__section">
@@ -118,8 +114,8 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
       </button>
       <div>
-        <h1 class="topbar__page-title">الإعدادات</h1>
-        <div class="topbar__page-subtitle">معلومات المطعم، الإعدادات المالية، والإشعارات</div>
+        <h1 class="topbar__page-title">الإعدادات المحاسبية</h1>
+        <div class="topbar__page-subtitle">إعدادات النظام المحاسبي والخزينة</div>
       </div>
       <div class="topbar__actions">
         <button class="btn btn--secondary">إلغاء</button>
@@ -132,14 +128,14 @@
         <div class="card">
           <div class="card__header">
             <div>
-              <h3 class="card__title">معلومات المطعم</h3>
-              <p class="card__subtitle">الاسم، العنوان، وبيانات التواصل</p>
+              <h3 class="card__title">معلومات الشركة</h3>
+              <p class="card__subtitle">الاسم، الرقم الضريبي، وبيانات التواصل</p>
             </div>
           </div>
           <div class="card__body">
             <div class="form-grid">
               <div class="form-field">
-                <label class="form-field__label">اسم المطعم</label>
+                <label class="form-field__label">اسم الشركة</label>
                 <input type="text" value="شركة المذاق العصري" />
               </div>
               <div class="form-field">
@@ -147,24 +143,16 @@
                 <input type="text" value="المذاق العصري" />
               </div>
               <div class="form-field">
-                <label class="form-field__label">رقم الهاتف</label>
-                <input type="tel" value="+966 11 234 5678" />
+                <label class="form-field__label">الرقم الضريبي</label>
+                <input type="text" value="300123456700003" />
               </div>
               <div class="form-field">
-                <label class="form-field__label">البريد الإلكتروني</label>
-                <input type="email" value="info@mazaq-asri.com" />
+                <label class="form-field__label">رقم الهاتف</label>
+                <input type="tel" value="+966 11 234 5678" />
               </div>
               <div class="form-field" style="grid-column: 1/-1;">
                 <label class="form-field__label">العنوان</label>
                 <input type="text" value="حي العليا، الرياض، المملكة العربية السعودية" />
-              </div>
-              <div class="form-field">
-                <label class="form-field__label">ساعات العمل</label>
-                <input type="text" value="١٠:٠٠ ص — ١١:٠٠ م" />
-              </div>
-              <div class="form-field">
-                <label class="form-field__label">الرقم الضريبي</label>
-                <input type="text" value="300123456700003" />
               </div>
             </div>
           </div>
@@ -173,8 +161,8 @@
         <div class="card">
           <div class="card__header">
             <div>
-              <h3 class="card__title">الإعدادات المالية</h3>
-              <p class="card__subtitle">العملة، الضرائب، والرسوم</p>
+              <h3 class="card__title">إعدادات المحاسبة</h3>
+              <p class="card__subtitle">العملة، الضرائب، والسياسات المحاسبية</p>
             </div>
           </div>
           <div class="card__body">
@@ -188,24 +176,24 @@
                 </select>
               </div>
               <div class="form-field">
-                <label class="form-field__label">نسبة الضريبة (%)</label>
+                <label class="form-field__label">نسبة ضريبة القيمة المضافة (%)</label>
                 <input type="number" value="15" />
-                <span class="form-field__hint">تطبق على جميع الطلبات</span>
-              </div>
-              <div class="form-field">
-                <label class="form-field__label">رسوم الخدمة (%)</label>
-                <input type="number" value="10" />
-                <span class="form-field__hint">للطلبات الداخلية فقط</span>
+                <span class="form-field__hint">تطبق على جميع الفواتير</span>
               </div>
               <div class="form-field">
                 <label class="form-field__label">بداية السنة المالية</label>
                 <input type="text" value="01-01" />
                 <span class="form-field__hint">بصيغة MM-DD</span>
               </div>
+              <div class="form-field">
+                <label class="form-field__label">حد العجز المسموح به يومياً (ر.س)</label>
+                <input type="number" value="50" />
+                <span class="form-field__hint">عند تجاوزه يتم تنبيه المدير</span>
+              </div>
               <div class="toggle-row">
                 <div>
                   <div class="toggle-row__label">النسخ الاحتياطي التلقائي</div>
-                  <div class="toggle-row__hint">نسخ احتياطي يومي للبيانات</div>
+                  <div class="toggle-row__hint">نسخ احتياطي يومي للقيود المحاسبية</div>
                 </div>
                 <label class="switch">
                   <input type="checkbox" checked />
@@ -220,43 +208,63 @@
       <div class="card" style="margin-top: var(--space-4);">
         <div class="card__header">
           <div>
-            <h3 class="card__title">الإشعارات</h3>
-            <p class="card__subtitle">اختر متى وكيف يصلك تنبيه</p>
+            <h3 class="card__title">إعدادات الفروع</h3>
+            <p class="card__subtitle">الفروع النشطة وسياسات الخزينة لكل فرع</p>
+          </div>
+        </div>
+        <div class="card__body card__body--flush">
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>الفرع</th>
+                  <th>المدير</th>
+                  <th>رصيد افتتاحي افتراضي</th>
+                  <th>عهدة افتراضية</th>
+                  <th>الحالة</th>
+                </tr>
+              </thead>
+              <tbody id="settings-branches-tbody">
+                <tr><td colspan="5" style="text-align:center; padding: 24px; color: var(--text-muted)">جاري التحميل…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: var(--space-4);">
+        <div class="card__header">
+          <div>
+            <h3 class="card__title">إشعارات محاسبية</h3>
+            <p class="card__subtitle">متى وكيف يصلك تنبيه محاسبي</p>
           </div>
         </div>
         <div class="card__body">
           <div class="toggle-row">
             <div>
-              <div class="toggle-row__label">تنبيهات البريد الإلكتروني</div>
-              <div class="toggle-row__hint">استلم إشعارات عبر البريد</div>
+              <div class="toggle-row__label">تنبيه عند عجز في الصندوق</div>
+              <div class="toggle-row__hint">عند تسجيل عجز يتجاوز الحد المسموح</div>
             </div>
             <label class="switch"><input type="checkbox" checked /><span class="switch__slider"></span></label>
           </div>
           <div class="toggle-row">
             <div>
-              <div class="toggle-row__label">تنبيهات SMS</div>
-              <div class="toggle-row__hint">رسائل قصيرة للأحداث المهمة</div>
+              <div class="toggle-row__label">تنبيه عند إيداع كبير في الخزينة</div>
+              <div class="toggle-row__hint">عند تحويل مبالغ كبيرة من الفروع</div>
             </div>
             <label class="switch"><input type="checkbox" checked /><span class="switch__slider"></span></label>
           </div>
           <div class="toggle-row">
             <div>
-              <div class="toggle-row__label">تنبيه نقص المخزون</div>
-              <div class="toggle-row__hint">عند انخفاض مادة تحت الحد الأدنى</div>
+              <div class="toggle-row__label">تقرير يومي بالإقفال</div>
+              <div class="toggle-row__hint">ملخص كل إقفالات اليوم</div>
             </div>
             <label class="switch"><input type="checkbox" checked /><span class="switch__slider"></span></label>
           </div>
           <div class="toggle-row">
             <div>
-              <div class="toggle-row__label">التقرير اليومي</div>
-              <div class="toggle-row__hint">استلم ملخص المبيعات كل مساء</div>
-            </div>
-            <label class="switch"><input type="checkbox" checked /><span class="switch__slider"></span></label>
-          </div>
-          <div class="toggle-row">
-            <div>
-              <div class="toggle-row__label">التقرير الأسبوعي</div>
-              <div class="toggle-row__hint">ملخص شامل كل يوم أحد</div>
+              <div class="toggle-row__label">تقرير أسبوعي للمدير</div>
+              <div class="toggle-row__hint">كل يوم أحد صباحاً</div>
             </div>
             <label class="switch"><input type="checkbox" checked /><span class="switch__slider"></span></label>
           </div>
@@ -266,8 +274,8 @@
       <div class="card" style="margin-top: var(--space-4);">
         <div class="card__header">
           <div>
-            <h3 class="card__title">الأمان والصلاحيات</h3>
-            <p class="card__subtitle">إدارة جلسات الدخول وكلمات المرور</p>
+            <h3 class="card__title">الأمان</h3>
+            <p class="card__subtitle">حماية حساب المحاسب</p>
           </div>
         </div>
         <div class="card__body">
@@ -312,5 +320,21 @@
   <script src="./config.js"></script>
   <script src="./mock-data.js"></script>
   <script src="./dashboard.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      const data = window.MOCK_DATA;
+      const ui = window.UI;
+      document.getElementById("settings-branches-tbody").innerHTML = data.branches.map((b) => `
+        <tr>
+          <td><div class="table__primary">${b.name}</div><div class="table__secondary">${b.location}</div></td>
+          <td>${b.manager}</td>
+          <td>١,٥٠٠ ر.س</td>
+          <td>٥٠٠ ر.س</td>
+          <td>${ui.statusBadge("active")}</td>
+        </tr>
+      `).join("");
+    })();
+  </script>
 </body>
 </html>
