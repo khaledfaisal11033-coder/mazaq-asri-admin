@@ -795,7 +795,13 @@
 
       document.querySelector("[data-action='submit-close']")?.addEventListener("click", () => {
         const shiftId = parseInt(shiftSel.value, 10);
-        if (!shiftId) return;
+        if (!shiftId) {
+          const empty = document.getElementById("close-empty");
+          if (empty) {
+            empty.innerHTML = '<p style="color: var(--accent-danger); font-weight: 600;">⚠ الرجاء اختيار الفرع والوردية أولاً</p>';
+          }
+          return;
+        }
         const shift = openShifts.find((s) => s.id === shiftId);
         if (!shift) return;
 
@@ -807,6 +813,15 @@
         const actual = parseFloat(document.getElementById("f-actual").value) || 0;
         const expected = shift.openingBalance + cash - out;
         const diff = actual - expected;
+
+        // تحقق: لو كل المبالغ صفر
+        if (cash === 0 && network === 0 && out === 0) {
+          const summary = document.getElementById("summary-box");
+          if (summary) {
+            summary.innerHTML = '<div class="alert-warning" style="background: rgba(181, 132, 30, 0.10); color: #B5841E; padding: 10px 14px; border-radius: 8px; font-size: 12.5px; margin-top: 12px;">⚠ الرجاء إدخال المبالغ (كاش، شبكة، خرج) قبل التأكيد.</div>';
+          }
+          return;
+        }
 
         // إضافة للإقفالات
         closings.unshift({
@@ -847,9 +862,31 @@
         const idx = openShifts.findIndex((s) => s.id === shiftId);
         if (idx > -1) openShifts.splice(idx, 1);
 
-        // إعادة عرض
-        alert("✅ تم إقفال الوردية وتحويل " + ui.formatCurrency(actual, "ر.س") + " للخزينة المركزية");
-        window.location.reload();
+        // عرض رسالة نجاح في الصفحة قبل التحديث
+        const summary = document.getElementById("summary-box");
+        if (summary) {
+          const diffText = diff === 0
+            ? "مطابق تماماً"
+            : diff > 0
+              ? `زيادة ${ui.formatCurrency(diff, "ر.س")} (أُضيفت للخزينة)`
+              : `عجز ${ui.formatCurrency(Math.abs(diff), "ر.س")}`;
+          summary.innerHTML = `<div style="background: var(--accent-success-bg); color: var(--accent-success); padding: 14px 16px; border-radius: 10px; font-size: 13.5px; font-weight: 600; margin-top: 12px;">
+            ✓ تم إقفال وردية "${branchName(shift.branchId)}" بنجاح
+            <div style="font-size: 12px; font-weight: 500; margin-top: 4px; opacity: 0.9;">
+              كاش محوّل للخزينة: <strong>${ui.formatCurrency(actual, "ر.س")}</strong> · ${diffText}
+            </div>
+          </div>`;
+        }
+
+        // تعطيل الزر لمنع الضغط المتكرر
+        const btn = document.querySelector("[data-action='submit-close']");
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = "✓ تم الإقفال";
+        }
+
+        // إعادة تحميل بعد ثانيتين
+        setTimeout(() => window.location.reload(), 1800);
       });
 
       /* ---------- Custody table ---------- */
