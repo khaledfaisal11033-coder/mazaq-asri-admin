@@ -208,11 +208,12 @@
 
   <script src="./config.js"></script>
   <script src="./mock-data.js"></script>
+  <script src="./store.js"></script>
   <script src="./dashboard.js"></script>
   <script>
     (function () {
       "use strict";
-      const data = window.MOCK_DATA;
+      const data = window.Store.get();
       const ui = window.UI;
       const closings = data.closings;
       const treasury = data.treasuryMovements;

@@ -576,12 +576,14 @@
 
   <script src="./config.js"></script>
   <script src="./mock-data.js"></script>
+  <script src="./store.js"></script>
   <script src="./dashboard.js"></script>
   <script>
     (function () {
       "use strict";
-      const data = window.MOCK_DATA;
+      const data = window.Store.get();
       const ui = window.UI;
+      const Store = window.Store;
       const branches = data.branches;
       const openShifts = data.openShifts;
       const closings = data.closings;
@@ -802,91 +804,73 @@
           }
           return;
         }
-        const shift = openShifts.find((s) => s.id === shiftId);
-        if (!shift) return;
 
         const cash = parseFloat(document.getElementById("f-cash").value) || 0;
         const network = parseFloat(document.getElementById("f-network").value) || 0;
         const out = parseFloat(document.getElementById("f-out").value) || 0;
         const custodyUsed = parseFloat(document.getElementById("f-custody-used").value) || 0;
-        const custodyEnd = (parseFloat(document.getElementById("f-custody-start").value) || 0) - custodyUsed;
         const actual = parseFloat(document.getElementById("f-actual").value) || 0;
-        const expected = shift.openingBalance + cash - out;
-        const diff = actual - expected;
 
-        // تحقق: لو كل المبالغ صفر
-        if (cash === 0 && network === 0 && out === 0) {
+        if (cash === 0 && network === 0 && out === 0 && actual === 0) {
           const summary = document.getElementById("summary-box");
           if (summary) {
-            summary.innerHTML = '<div class="alert-warning" style="background: rgba(181, 132, 30, 0.10); color: #B5841E; padding: 10px 14px; border-radius: 8px; font-size: 12.5px; margin-top: 12px;">⚠ الرجاء إدخال المبالغ (كاش، شبكة، خرج) قبل التأكيد.</div>';
+            summary.innerHTML = '<div class="alert-warning" style="background: rgba(181, 132, 30, 0.10); color: #B5841E; padding: 10px 14px; border-radius: 8px; font-size: 12.5px; margin-top: 12px;">⚠ الرجاء إدخال المبالغ (كاش، شبكة، خرج، فعلي) قبل التأكيد.</div>';
           }
           return;
         }
 
-        // إضافة للإقفالات
-        closings.unshift({
-          id: closings.length + 1,
-          branchId: shift.branchId,
-          shiftType: shift.shiftType,
-          date: "2026-10-07",
-          worker: shift.worker,
-          closedBy: "المدير العام",
-          openingBalance: shift.openingBalance,
+        const closing = Store.closeShift(shiftId, {
           cashSales: cash,
           networkSales: network,
           cashOut: out,
-          custodyStart: parseFloat(document.getElementById("f-custody-start").value) || 0,
-          custodyUsed,
-          custodyEnd: Math.max(0, custodyEnd),
+          custodyUsed: custodyUsed,
           actualCash: actual,
-          expectedCash: expected,
-          difference: diff,
-          transferredToTreasury: actual,
-          treasuryConfirmed: true,
-          closedAt: new Date().toTimeString().slice(0, 5),
-          notes: document.getElementById("f-notes").value || ""
+          notes: document.getElementById("f-notes")?.value || "",
         });
 
-        // إضافة للخزينة (الكاش فقط)
-        treasury.unshift({
-          id: treasury.length + 1,
-          branchId: shift.branchId,
-          date: "2026-10-07",
-          amount: actual,
-          type: "deposit",
-          source: `إقفال وردية ${shift.shiftType}`,
-          status: "confirmed"
-        });
+        if (!closing) {
+          const summary = document.getElementById("summary-box");
+          if (summary) {
+            summary.innerHTML = '<div class="alert-warning" style="background: rgba(176, 74, 74, 0.10); color: #B04A4A; padding: 10px 14px; border-radius: 8px; font-size: 12.5px; margin-top: 12px;">⚠ تعذّر إيجاد الوردية. قد تكون أُقفلت من قبل.</div>';
+          }
+          return;
+        }
 
-        // حذف الوردية من المفتوحة
-        const idx = openShifts.findIndex((s) => s.id === shiftId);
-        if (idx > -1) openShifts.splice(idx, 1);
-
-        // عرض رسالة نجاح في الصفحة قبل التحديث
         const summary = document.getElementById("summary-box");
         if (summary) {
-          const diffText = diff === 0
+          const diffText = closing.difference === 0
             ? "مطابق تماماً"
-            : diff > 0
-              ? `زيادة ${ui.formatCurrency(diff, "ر.س")} (أُضيفت للخزينة)`
-              : `عجز ${ui.formatCurrency(Math.abs(diff), "ر.س")}`;
+            : closing.difference > 0
+              ? `زيادة ${ui.formatCurrency(closing.difference, "ر.س")} (أُضيفت للخزينة)`
+              : `عجز ${ui.formatCurrency(Math.abs(closing.difference), "ر.س")}`;
           summary.innerHTML = `<div style="background: var(--accent-success-bg); color: var(--accent-success); padding: 14px 16px; border-radius: 10px; font-size: 13.5px; font-weight: 600; margin-top: 12px;">
-            ✓ تم إقفال وردية "${branchName(shift.branchId)}" بنجاح
+            ✓ تم إقفال وردية "${branchName(closing.branchId)}" بنجاح
             <div style="font-size: 12px; font-weight: 500; margin-top: 4px; opacity: 0.9;">
-              كاش محوّل للخزينة: <strong>${ui.formatCurrency(actual, "ر.س")}</strong> · ${diffText}
+              كاش محوّل للخزينة: <strong>${ui.formatCurrency(closing.transferredToTreasury, "ر.س")}</strong> · ${diffText}
             </div>
           </div>`;
         }
 
-        // تعطيل الزر لمنع الضغط المتكرر
         const btn = document.querySelector("[data-action='submit-close']");
         if (btn) {
           btn.disabled = true;
           btn.textContent = "✓ تم الإقفال";
         }
 
-        // إعادة تحميل بعد ثانيتين
         setTimeout(() => window.location.reload(), 1800);
+      });
+
+      // زر "بدء وردية" في الأعلى
+      document.querySelector("[data-action='new-shift']")?.addEventListener("click", () => {
+        const data = Store.get();
+        if (data.branches.length === 0) {
+          alert("أضف محلاً أولاً من صفحة المحلات");
+          return;
+        }
+        const branch = data.branches[0];
+        const shift = Store.startShift(branch.id, "صباحية", "—", 0, 0);
+        alert(`تم بدء وردية صباحية في ${branch.name} ✓`);
+        setTimeout(() => window.location.reload(), 800);
       });
 
       /* ---------- Custody table ---------- */

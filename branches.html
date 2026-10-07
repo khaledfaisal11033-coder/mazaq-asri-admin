@@ -34,9 +34,7 @@
       text-align: center;
       vertical-align: middle;
     }
-    .branches-table tbody tr:hover td {
-      background: var(--surface-hover);
-    }
+    .branches-table tbody tr:hover td { background: var(--surface-hover); }
     .branches-table .col-name { text-align: right; min-width: 180px; }
     .branches-table .num { font-family: var(--font-heading); font-weight: 600; direction: ltr; }
     .branches-table tfoot td {
@@ -47,7 +45,6 @@
       padding: 14px 12px;
       border-color: var(--text-ink);
     }
-
     .col-cash { color: var(--accent-success); font-weight: 700; }
     .col-network { color: var(--accent-info); font-weight: 600; }
     .col-out { color: var(--accent-danger); font-weight: 600; }
@@ -78,6 +75,19 @@
       font-weight: 700;
       font-size: 13.5px;
       color: var(--text-ink);
+      cursor: pointer;
+      padding: 4px 6px;
+      border-radius: 4px;
+      border: 1px dashed transparent;
+    }
+    .branch-name-cell__primary:hover {
+      border-color: var(--border-soft);
+      background: var(--surface-canvas);
+    }
+    .branch-name-cell__primary[contenteditable="true"]:focus {
+      outline: none;
+      border-color: var(--text-ink);
+      background: #FFFFFF;
     }
     .branch-name-cell__secondary {
       font-size: 11.5px;
@@ -85,83 +95,27 @@
       margin-top: 1px;
     }
 
-    /* Expandable detail row */
-    .detail-row {
-      display: none;
+    .row-actions {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
     }
-    .detail-row.is-open { display: table-row; }
-    .detail-row td {
-      background: var(--surface-canvas);
-      padding: 0;
-      border-left: 1px solid var(--border-soft);
-    }
-    .detail-content {
-      padding: var(--space-5);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-4);
-    }
-    @media (max-width: 900px) { .detail-content { grid-template-columns: 1fr; } }
-
-    .detail-section {
-      background: #FFFFFF;
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-md);
-      padding: var(--space-4);
-    }
-    .detail-section h4 {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 13px;
-      margin: 0 0 var(--space-3) 0;
-      padding-bottom: 8px;
-      border-bottom: 1px solid var(--border-soft);
-      color: var(--text-ink);
-    }
-
-    .mini-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 12px;
-    }
-    .mini-table th {
-      text-align: start;
-      padding: 6px 8px;
-      font-size: 10.5px;
-      font-weight: 600;
+    .icon-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: var(--radius-sm);
+      background: transparent;
+      border: 1px solid transparent;
       color: var(--text-muted);
-      background: var(--surface-canvas);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
     }
-    .mini-table td {
-      padding: 8px;
-      border-bottom: 1px solid var(--border-soft);
-    }
-    .mini-table tr:last-child td { border-bottom: none; }
-
-    /* Quick stats */
-    .quick-stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: var(--space-3);
-      margin-bottom: var(--space-4);
-    }
-    .quick-stat {
-      background: #FFFFFF;
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-md);
-      padding: 14px 16px;
-      box-shadow: var(--shadow-card);
-    }
-    .quick-stat__label { font-size: 11.5px; color: var(--text-muted); }
-    .quick-stat__value {
-      font-family: var(--font-heading);
-      font-weight: 800;
-      font-size: 20px;
-      color: var(--text-ink);
-      margin-top: 4px;
-    }
+    .icon-btn:hover { background: var(--surface-hover); color: var(--text-ink); border-color: var(--border-soft); }
+    .icon-btn--danger:hover { background: var(--accent-danger-bg); color: var(--accent-danger); border-color: var(--accent-danger); }
+    .icon-btn svg { width: 14px; height: 14px; }
 
     .treasury-hero {
       background: linear-gradient(135deg, #151A29 0%, #232838 100%);
@@ -196,7 +150,6 @@
     }
     .treasury-hero__item { display: flex; gap: 8px; font-size: 12px; opacity: 0.9; }
     .treasury-hero__item strong { font-family: var(--font-heading); font-weight: 700; }
-
     @media (max-width: 720px) {
       .treasury-hero { grid-template-columns: 1fr; text-align: center; }
       .treasury-hero__breakdown { border-inline-start: none; border-top: 1px solid rgba(255,255,255,0.2); padding: 12px 0 0; }
@@ -213,6 +166,60 @@
       gap: 8px;
       margin-bottom: var(--space-4);
     }
+
+    .quick-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: var(--space-3);
+      margin-bottom: var(--space-4);
+    }
+    .quick-stat {
+      background: #FFFFFF;
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      box-shadow: var(--shadow-card);
+    }
+    .quick-stat__label { font-size: 11.5px; color: var(--text-muted); }
+    .quick-stat__value { font-family: var(--font-heading); font-weight: 800; font-size: 20px; color: var(--text-ink); margin-top: 4px; }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+    .empty-state__icon { font-size: 48px; margin-bottom: 12px; opacity: 0.3; }
+    .empty-state__title { font-family: var(--font-heading); font-weight: 700; font-size: 16px; color: var(--text-ink); margin-bottom: 8px; }
+    .empty-state__hint { font-size: 13px; }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed; inset: 0; background: rgba(21,26,41,0.5);
+      display: none; align-items: center; justify-content: center;
+      z-index: 100; padding: 20px;
+    }
+    .modal-backdrop.is-open { display: flex; }
+    .modal {
+      background: #FFFFFF; border-radius: 14px; width: 100%; max-width: 480px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden;
+    }
+    .modal__header {
+      padding: 16px 20px; border-bottom: 1px solid var(--border-soft);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .modal__title { font-family: var(--font-heading); font-weight: 700; font-size: 16px; }
+    .modal__close { background: none; border: none; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; color: var(--text-muted); }
+    .modal__close:hover { background: var(--surface-hover); color: var(--text-ink); }
+    .modal__body { padding: 20px; }
+    .modal__footer { padding: 12px 20px; border-top: 1px solid var(--border-soft); display: flex; gap: 8px; justify-content: flex-end; }
+
+    .form-group { margin-bottom: 12px; }
+    .form-group__label { display: block; font-size: 12.5px; font-weight: 600; margin-bottom: 4px; }
+    .form-group__input {
+      width: 100%; padding: 9px 12px; border: 1px solid var(--border-soft);
+      border-radius: 8px; font-size: 13px; font-family: inherit;
+    }
+    .form-group__input:focus { outline: none; border-color: var(--text-ink); }
   </style>
 </head>
 <body>
@@ -259,15 +266,15 @@
       </button>
       <div>
         <h1 class="topbar__page-title">المحلات</h1>
-        <div class="topbar__page-subtitle">كل محل حساباته منفصلة (كاش، شبكة، خرج، عهدة) · الكاش ينضاف للخزينة المركزية</div>
+        <div class="topbar__page-subtitle">أضف محلاتك، سمّيها، وأدِر حساباتها (كاش، شبكة، خرج، عهدة) · الكاش ينضاف للخزينة</div>
       </div>
       <div class="topbar__actions">
-        <button class="btn btn--primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>إضافة محل</button>
+        <button class="btn btn--secondary" data-action="export"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>تصدير CSV</button>
+        <button class="btn btn--primary" data-action="add-branch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>إضافة محل</button>
       </div>
     </header>
 
     <main class="main">
-      <!-- Treasury hero -->
       <div class="treasury-hero">
         <div class="treasury-hero__icon">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -278,46 +285,32 @@
         </div>
         <div>
           <div class="treasury-hero__label">الخزينة المركزية (كاش مجمّع من كل المحلات)</div>
-          <div class="treasury-hero__value" data-bind="treasury-total">—</div>
-          <div class="treasury-hero__hint" data-bind="treasury-meta">—</div>
+          <div class="treasury-hero__value" id="treasury-total">٠٫٠٠ ر.س</div>
+          <div class="treasury-hero__hint" id="treasury-meta">—</div>
         </div>
         <div class="treasury-hero__breakdown">
-          <div class="treasury-hero__item">عدد المحلات: <strong data-bind="branches-count">—</strong></div>
-          <div class="treasury-hero__item">ورديات مفتوحة: <strong data-bind="open-count">—</strong></div>
+          <div class="treasury-hero__item">عدد المحلات: <strong id="branches-count">٠</strong></div>
+          <div class="treasury-hero__item">ورديات مفتوحة: <strong id="open-count">٠</strong></div>
         </div>
       </div>
 
       <div class="alert-info">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-        <span>كل حساب <strong>لكل محل لحاله</strong> (شبكة، خرج، عهدة) — <strong>الكاش فقط</strong> يتجمع تلقائياً في الخزينة المركزية.</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <span><strong>انقر على اسم المحل</strong> لتعديله. استخدم أزرار العمود الأخير لإضافة ورديات أو حذف المحل.</span>
       </div>
 
-      <!-- Quick stats -->
       <div class="quick-stats">
-        <div class="quick-stat">
-          <div class="quick-stat__label">إجمالي الكاش (كل المحلات)</div>
-          <div class="quick-stat__value col-cash" data-bind="total-cash">—</div>
-        </div>
-        <div class="quick-stat">
-          <div class="quick-stat__label">إجمالي الشبكة (كل المحلات)</div>
-          <div class="quick-stat__value col-network" data-bind="total-network">—</div>
-        </div>
-        <div class="quick-stat">
-          <div class="quick-stat__label">إجمالي الخرج (كل المحلات)</div>
-          <div class="quick-stat__value col-out" data-bind="total-out">—</div>
-        </div>
-        <div class="quick-stat">
-          <div class="quick-stat__label">إجمالي العُهد</div>
-          <div class="quick-stat__value" data-bind="total-custody">—</div>
-        </div>
+        <div class="quick-stat"><div class="quick-stat__label">إجمالي الكاش</div><div class="quick-stat__value col-cash" id="total-cash">٠٫٠٠ ر.س</div></div>
+        <div class="quick-stat"><div class="quick-stat__label">إجمالي الشبكة</div><div class="quick-stat__value col-network" id="total-network">٠٫٠٠ ر.س</div></div>
+        <div class="quick-stat"><div class="quick-stat__label">إجمالي الخرج</div><div class="quick-stat__value col-out" id="total-out">٠٫٠٠ ر.س</div></div>
+        <div class="quick-stat"><div class="quick-stat__label">إجمالي العُهد</div><div class="quick-stat__value" id="total-custody">٠٫٠٠ ر.س</div></div>
       </div>
 
-      <!-- Branches table -->
       <div class="card">
         <div class="card__header">
           <div>
             <h3 class="card__title">جدول المحلات</h3>
-            <p class="card__subtitle">حسابات كل محل منفصلة — اضغط على المحل لعرض التفاصيل</p>
+            <p class="card__subtitle">انقر على اسم المحل لتعديله مباشرة</p>
           </div>
         </div>
         <div class="card__body card__body--flush">
@@ -331,22 +324,13 @@
                   <th>شبكة</th>
                   <th>خرج</th>
                   <th>عُهدة</th>
-                  <th>المحول للخزينة</th>
+                  <th>للخزينة</th>
                   <th>الحالة</th>
+                  <th>إجراءات</th>
                 </tr>
               </thead>
               <tbody id="branches-tbody"></tbody>
-              <tfoot>
-                <tr>
-                  <td colspan="2">الإجمالي</td>
-                  <td class="num col-cash" data-bind="foot-cash">—</td>
-                  <td class="num col-network" data-bind="foot-network">—</td>
-                  <td class="num col-out" data-bind="foot-out">—</td>
-                  <td class="num" data-bind="foot-custody">—</td>
-                  <td class="num col-treasury" data-bind="foot-treasury">—</td>
-                  <td>—</td>
-                </tr>
-              </tfoot>
+              <tfoot id="branches-tfoot"></tfoot>
             </table>
           </div>
         </div>
@@ -363,155 +347,276 @@
     </main>
   </div>
 
+  <!-- Modal: إضافة محل -->
+  <div class="modal-backdrop" id="add-modal">
+    <div class="modal">
+      <div class="modal__header">
+        <div class="modal__title">إضافة محل جديد</div>
+        <button class="modal__close" data-action="close-modal">✕</button>
+      </div>
+      <div class="modal__body">
+        <div class="form-group">
+          <label class="form-group__label">اسم المحل *</label>
+          <input type="text" class="form-group__input" id="b-name" placeholder="مثال: محل العليا" />
+        </div>
+        <div class="form-group">
+          <label class="form-group__label">الموقع</label>
+          <input type="text" class="form-group__input" id="b-location" placeholder="مثال: الرياض - حي العليا" />
+        </div>
+        <div class="form-group">
+          <label class="form-group__label">المدير</label>
+          <input type="text" class="form-group__input" id="b-manager" placeholder="اسم المدير" />
+        </div>
+        <div class="form-group">
+          <label class="form-group__label">رقم الهاتف</label>
+          <input type="tel" class="form-group__input" id="b-phone" placeholder="+966 5X XXX XXXX" />
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--secondary" data-action="close-modal">إلغاء</button>
+        <button class="btn btn--primary" data-action="save-branch">حفظ</button>
+      </div>
+    </div>
+  </div>
+
   <script src="./config.js"></script>
   <script src="./mock-data.js"></script>
+  <script src="./store.js"></script>
   <script src="./dashboard.js"></script>
   <script>
     (function () {
       "use strict";
-      const data = window.MOCK_DATA;
+
       const ui = window.UI;
-      const branches = data.branches;
-      const openShifts = data.openShifts;
-      const closings = data.closings;
-      const treasury = data.treasuryMovements;
-      const custody = data.custodyRecords;
+      const Store = window.Store;
 
-      // Treasury banner
-      const treasuryTotal = treasury.reduce((s, t) => s + t.amount, 0);
-      document.querySelector("[data-bind='treasury-total']").textContent = ui.formatCurrency(treasuryTotal, "ر.س");
-      document.querySelector("[data-bind='treasury-meta']").textContent = `آخر إيداع: ${treasury[0]?.date || "—"} · إجمالي ${treasury.length} حركة`;
-      document.querySelector("[data-bind='branches-count']").textContent = ui.formatNumber(branches.length);
-      document.querySelector("[data-bind='open-count']").textContent = ui.formatNumber(openShifts.length);
+      function formatNum(n) {
+        return (Number(n) || 0).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      }
 
-      function branchName(id) { return branches.find((b) => b.id === id)?.name || "—"; }
       function branchInitials(name) {
-        return name.replace("فرع ", "").split(" ").slice(0, 2).map((w) => w[0]).join("");
-      }
-      function getBranchOpenShift(branchId) {
-        return openShifts.find((s) => s.branchId === branchId && s.status === "open");
-      }
-      function getBranchClosings(branchId) {
-        return closings.filter((c) => c.branchId === branchId);
-      }
-      function getBranchCustody(branchId) {
-        return custody.filter((c) => c.branchId === branchId);
+        if (!name) return "?";
+        return name.replace(/^فرع\s*/, "").split(" ").slice(0, 2).map((w) => w[0]).join("").toUpperCase();
       }
 
-      // Quick stats totals
-      const allCash = closings.reduce((s, c) => s + c.cashSales, 0);
-      const allNet = closings.reduce((s, c) => s + c.networkSales, 0);
-      const allOut = closings.reduce((s, c) => s + c.cashOut, 0);
-      const allCustody = custody.reduce((s, c) => s + c.amount, 0);
-      const allDeposits = closings.reduce((s, c) => s + c.transferredToTreasury, 0);
+      function getData() { return Store.get(); }
 
-      document.querySelector("[data-bind='total-cash']").textContent = ui.formatCurrency(allCash, "ر.س");
-      document.querySelector("[data-bind='total-network']").textContent = ui.formatCurrency(allNet, "ر.س");
-      document.querySelector("[data-bind='total-out']").textContent = ui.formatCurrency(allOut, "ر.س");
-      document.querySelector("[data-bind='total-custody']").textContent = ui.formatCurrency(allCustody, "ر.س");
-      document.querySelector("[data-bind='foot-cash']").textContent = ui.formatCurrency(allCash, "ر.س");
-      document.querySelector("[data-bind='foot-network']").textContent = ui.formatCurrency(allNet, "ر.س");
-      document.querySelector("[data-bind='foot-out']").textContent = ui.formatCurrency(allOut, "ر.س");
-      document.querySelector("[data-bind='foot-custody']").textContent = ui.formatCurrency(allCustody, "ر.س");
-      document.querySelector("[data-bind='foot-treasury']").textContent = ui.formatCurrency(allDeposits, "ر.س");
+      function computeBranchStats(branchId) {
+        const data = getData();
+        const closings = data.closings.filter((c) => c.branchId === branchId);
+        const custody = data.custodyRecords.filter((c) => c.branchId === branchId);
+        return {
+          cash: closings.reduce((s, c) => s + (c.cashSales || 0), 0),
+          network: closings.reduce((s, c) => s + (c.networkSales || 0), 0),
+          out: closings.reduce((s, c) => s + (c.cashOut || 0), 0),
+          custody: custody.reduce((s, c) => s + (c.amount || 0), 0),
+          deposits: closings.reduce((s, c) => s + (c.transferredToTreasury || 0), 0),
+          hasOpenShift: data.openShifts.some((s) => s.branchId === branchId),
+        };
+      }
 
-      function formatNum(n) { return (Number(n) || 0).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+      function render() {
+        const data = getData();
+        const branches = data.branches || [];
+        const tbody = document.getElementById("branches-tbody");
+        const tfoot = document.getElementById("branches-tfoot");
 
-      function renderRow(branch) {
-        const openShift = getBranchOpenShift(branch.id);
-        const branchClosings = getBranchClosings(branch.id);
-        const cash = branchClosings.reduce((s, c) => s + c.cashSales, 0);
-        const net = branchClosings.reduce((s, c) => s + c.networkSales, 0);
-        const out = branchClosings.reduce((s, c) => s + c.cashOut, 0);
-        const cust = getBranchCustody(branch.id).reduce((s, c) => s + c.amount, 0);
-        const dep = branchClosings.reduce((s, c) => s + c.transferredToTreasury, 0);
-
-        return `
-          <tr class="branch-row" data-branch="${branch.id}" style="cursor: pointer;">
-            <td class="col-name">
-              <div class="branch-name-cell">
-                <div class="branch-name-cell__icon">${branchInitials(branch.name)}</div>
-                <div>
-                  <div class="branch-name-cell__primary">${branch.name}</div>
-                  <div class="branch-name-cell__secondary">${branch.location}</div>
-                </div>
+        if (branches.length === 0) {
+          tbody.innerHTML = `
+            <tr><td colspan="9">
+              <div class="empty-state">
+                <div class="empty-state__icon">🏪</div>
+                <div class="empty-state__title">لا توجد محلات بعد</div>
+                <div class="empty-state__hint">اضغط على زر "إضافة محل" بالأعلى لبدء إدارة محلاتك</div>
               </div>
-            </td>
-            <td>${branch.manager}</td>
-            <td class="num col-cash">${formatNum(cash)}</td>
-            <td class="num col-network">${formatNum(net)}</td>
-            <td class="num col-out">${formatNum(out)}</td>
-            <td class="num">${formatNum(cust)}</td>
-            <td class="num col-treasury">${formatNum(dep)}</td>
-            <td>${openShift ? '<span class="badge badge--success"><span class="badge__dot"></span>مفتوحة</span>' : '<span class="badge badge--neutral">مغلقة</span>'}</td>
-          </tr>
-          <tr class="detail-row" data-detail="${branch.id}">
-            <td colspan="8">
-              <div class="detail-content">
-                <div class="detail-section">
-                  <h4>إقفال ورديات ${branch.name} (${branchClosings.length})</h4>
-                  ${branchClosings.length > 0 ? `
-                    <table class="mini-table">
-                      <thead>
-                        <tr><th>التاريخ</th><th>الوردية</th><th>كاش</th><th>شبكة</th><th>خرج</th><th>للخزينة</th></tr>
-                      </thead>
-                      <tbody>
-                        ${branchClosings.slice(0, 5).map((c) => `
-                          <tr>
-                            <td>${c.date}</td>
-                            <td>${c.shiftType}</td>
-                            <td class="num col-cash">${formatNum(c.cashSales)}</td>
-                            <td class="num col-network">${formatNum(c.networkSales)}</td>
-                            <td class="num col-out">${formatNum(c.cashOut)}</td>
-                            <td class="num col-treasury">${formatNum(c.transferredToTreasury)}</td>
-                          </tr>
-                        `).join("")}
-                      </tbody>
-                    </table>
-                  ` : '<p style="color: var(--text-muted); font-size: 12px;">لا توجد إقفالات سابقة</p>'}
-                </div>
-                <div class="detail-section">
-                  <h4>عُهد ${branch.name} (${getBranchCustody(branch.id).length})</h4>
-                  ${getBranchCustody(branch.id).length > 0 ? `
-                    <table class="mini-table">
-                      <thead>
-                        <tr><th>المبلغ</th><th>المدير</th><th>العامل</th><th>الغرض</th></tr>
-                      </thead>
-                      <tbody>
-                        ${getBranchCustody(branch.id).map((c) => `
-                          <tr>
-                            <td class="num">${formatNum(c.amount)}</td>
-                            <td>${c.manager}</td>
-                            <td>${c.toWorker}</td>
-                            <td>${c.purpose}</td>
-                          </tr>
-                        `).join("")}
-                      </tbody>
-                    </table>
-                  ` : '<p style="color: var(--text-muted); font-size: 12px;">لا توجد عُهد نشطة</p>'}
-                </div>
-              </div>
-            </td>
-          </tr>
-        `;
+            </td></tr>`;
+          tfoot.innerHTML = "";
+        } else {
+          tbody.innerHTML = branches.map((b) => {
+            const stats = computeBranchStats(b.id);
+            return `
+              <tr data-branch-id="${b.id}">
+                <td class="col-name">
+                  <div class="branch-name-cell">
+                    <div class="branch-name-cell__icon">${branchInitials(b.name)}</div>
+                    <div>
+                      <div class="branch-name-cell__primary" contenteditable="true" data-field="name" data-id="${b.id}">${b.name || "بدون اسم"}</div>
+                      <div class="branch-name-cell__secondary" contenteditable="true" data-field="location" data-id="${b.id}">${b.location || "—"}</div>
+                    </div>
+                  </div>
+                </td>
+                <td contenteditable="true" data-field="manager" data-id="${b.id}">${b.manager || "—"}</td>
+                <td class="num col-cash">${formatNum(stats.cash)}</td>
+                <td class="num col-network">${formatNum(stats.network)}</td>
+                <td class="num col-out">${formatNum(stats.out)}</td>
+                <td class="num">${formatNum(stats.custody)}</td>
+                <td class="num col-treasury">${formatNum(stats.deposits)}</td>
+                <td>${stats.hasOpenShift ? '<span class="badge badge--success"><span class="badge__dot"></span>مفتوحة</span>' : '<span class="badge badge--neutral">مغلقة</span>'}</td>
+                <td>
+                  <div class="row-actions">
+                    <button class="icon-btn" data-action="start-shift" data-id="${b.id}" title="بدء وردية جديدة">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    </button>
+                    <a class="icon-btn" href="./closing.html" title="إقفال وردية">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                    </a>
+                    <button class="icon-btn icon-btn--danger" data-action="delete-branch" data-id="${b.id}" title="حذف المحل">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+                    </button>
+                  </div>
+                </td>
+              </tr>`;
+          }).join("");
+
+          // Totals
+          let totalCash = 0, totalNet = 0, totalOut = 0, totalCust = 0, totalDep = 0;
+          branches.forEach((b) => {
+            const s = computeBranchStats(b.id);
+            totalCash += s.cash; totalNet += s.network; totalOut += s.out; totalCust += s.custody; totalDep += s.deposits;
+          });
+          tfoot.innerHTML = `
+            <tr>
+              <td colspan="2">الإجمالي</td>
+              <td class="num col-cash">${formatNum(totalCash)}</td>
+              <td class="num col-network">${formatNum(totalNet)}</td>
+              <td class="num col-out">${formatNum(totalOut)}</td>
+              <td class="num">${formatNum(totalCust)}</td>
+              <td class="num col-treasury">${formatNum(totalDep)}</td>
+              <td colspan="2">—</td>
+            </tr>`;
+        }
+
+        // Treasury
+        const treasuryTotal = data.treasuryMovements.reduce((s, t) => s + t.amount, 0);
+        document.getElementById("treasury-total").textContent = ui.formatCurrency(treasuryTotal, "ر.س");
+        document.getElementById("treasury-meta").textContent = `${data.treasuryMovements.length} إيداع في الخزينة`;
+        document.getElementById("branches-count").textContent = ui.formatNumber(branches.length);
+        document.getElementById("open-count").textContent = ui.formatNumber(data.openShifts.length);
+
+        // Quick stats
+        const allCash = data.closings.reduce((s, c) => s + c.cashSales, 0);
+        const allNet = data.closings.reduce((s, c) => s + c.networkSales, 0);
+        const allOut = data.closings.reduce((s, c) => s + c.cashOut, 0);
+        const allCust = data.custodyRecords.reduce((s, c) => s + c.amount, 0);
+        document.getElementById("total-cash").textContent = ui.formatCurrency(allCash, "ر.س");
+        document.getElementById("total-network").textContent = ui.formatCurrency(allNet, "ر.س");
+        document.getElementById("total-out").textContent = ui.formatCurrency(allOut, "ر.س");
+        document.getElementById("total-custody").textContent = ui.formatCurrency(allCust, "ر.س");
+
+        // bind inline edits
+        bindInlineEdits();
+        // bind row actions
+        bindRowActions();
       }
 
-      const tbody = document.getElementById("branches-tbody");
-      if (tbody) {
-        tbody.innerHTML = branches.map(renderRow).join("");
-
-        // toggle row detail
-        tbody.querySelectorAll(".branch-row").forEach((row) => {
-          row.addEventListener("click", () => {
-            const branchId = row.dataset.branch;
-            const detail = document.querySelector(`[data-detail="${branchId}"]`);
-            if (detail) {
-              const opening = detail.classList.toggle("is-open");
-              row.classList.toggle("is-open", opening);
+      function bindInlineEdits() {
+        document.querySelectorAll("[contenteditable='true']").forEach((el) => {
+          if (el.dataset.bound) return;
+          el.dataset.bound = "1";
+          el.addEventListener("blur", () => {
+            const id = parseInt(el.dataset.id, 10);
+            const field = el.dataset.field;
+            const value = el.textContent.trim();
+            Store.updateBranch(id, { [field]: value });
+            render();
+            showToast("تم حفظ التغييرات ✓");
+          });
+          el.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              el.blur();
             }
           });
         });
       }
+
+      function bindRowActions() {
+        document.querySelectorAll("[data-action='start-shift']").forEach((btn) => {
+          if (btn.dataset.bound) return;
+          btn.dataset.bound = "1";
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const id = parseInt(btn.dataset.id, 10);
+            const branch = Store.get().branches.find((b) => b.id === id);
+            const shift = Store.startShift(id, "صباحية", "—", 0, 0);
+            showToast(`تم بدء وردية صباحية في ${branch.name} ✓`);
+            render();
+          });
+        });
+        document.querySelectorAll("[data-action='delete-branch']").forEach((btn) => {
+          if (btn.dataset.bound) return;
+          btn.dataset.bound = "1";
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const id = parseInt(btn.dataset.id, 10);
+            const branch = Store.get().branches.find((b) => b.id === id);
+            if (confirm(`هل أنت متأكد من حذف "${branch.name}" وكل بياناته؟`)) {
+              Store.deleteBranch(id);
+              showToast("تم حذف المحل");
+              render();
+            }
+          });
+        });
+      }
+
+      // Modal
+      const modal = document.getElementById("add-modal");
+      document.querySelector("[data-action='add-branch']")?.addEventListener("click", () => {
+        document.getElementById("b-name").value = "";
+        document.getElementById("b-location").value = "";
+        document.getElementById("b-manager").value = "";
+        document.getElementById("b-phone").value = "";
+        modal.classList.add("is-open");
+        setTimeout(() => document.getElementById("b-name").focus(), 100);
+      });
+      document.querySelectorAll("[data-action='close-modal']").forEach((btn) => {
+        btn.addEventListener("click", () => modal.classList.remove("is-open"));
+      });
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.classList.remove("is-open");
+      });
+      document.querySelector("[data-action='save-branch']")?.addEventListener("click", () => {
+        const name = document.getElementById("b-name").value.trim();
+        if (!name) {
+          showToast("الرجاء إدخال اسم المحل", "warn");
+          return;
+        }
+        const branch = Store.addBranch({
+          name,
+          location: document.getElementById("b-location").value.trim(),
+          manager: document.getElementById("b-manager").value.trim(),
+          phone: document.getElementById("b-phone").value.trim(),
+        });
+        modal.classList.remove("is-open");
+        showToast(`تم إضافة "${branch.name}" ✓`);
+        render();
+      });
+
+      // Export
+      document.querySelector("[data-action='export']")?.addEventListener("click", () => {
+        Store.exportCSV("branches", "branches.csv");
+      });
+
+      // Toast
+      function showToast(msg, type) {
+        let toast = document.getElementById("toast");
+        if (!toast) {
+          toast = document.createElement("div");
+          toast.id = "toast";
+          toast.style.cssText = "position:fixed;bottom:24px;inset-inline-end:24px;background:#151A29;color:#fff;padding:12px 18px;border-radius:10px;font-size:13px;font-weight:600;z-index:200;box-shadow:0 10px 30px rgba(0,0,0,0.3);transition:opacity 0.2s;opacity:0;";
+          document.body.appendChild(toast);
+        }
+        toast.textContent = msg;
+        if (type === "warn") toast.style.background = "#B5841E";
+        else if (type === "err") toast.style.background = "#B04A4A";
+        else toast.style.background = "#151A29";
+        toast.style.opacity = "1";
+        clearTimeout(window._toastTimer);
+        window._toastTimer = setTimeout(() => { toast.style.opacity = "0"; }, 2200);
+      }
+
+      // First render
+      render();
     })();
   </script>
 </body>
