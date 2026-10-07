@@ -11,112 +11,6 @@
   <link rel="stylesheet" href="./styles.css" />
   <link rel="stylesheet" href="./dashboard.css" />
   <style>
-    .branches-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-    .branches-table thead th {
-      background: var(--text-ink);
-      color: #FFFFFF;
-      padding: 14px 12px;
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 12.5px;
-      text-align: center;
-      white-space: nowrap;
-      border: 1px solid var(--text-ink);
-    }
-    .branches-table tbody td {
-      padding: 14px 12px;
-      border-bottom: 1px solid var(--border-soft);
-      border-left: 1px solid var(--border-soft);
-      text-align: center;
-      vertical-align: middle;
-    }
-    .branches-table tbody tr:hover td { background: var(--surface-hover); }
-    .branches-table .col-name { text-align: right; min-width: 180px; }
-    .branches-table .num { font-family: var(--font-heading); font-weight: 600; direction: ltr; }
-    .branches-table tfoot td {
-      background: var(--text-ink);
-      color: #FFFFFF;
-      font-family: var(--font-heading);
-      font-weight: 800;
-      padding: 14px 12px;
-      border-color: var(--text-ink);
-    }
-    .col-cash { color: var(--accent-success); font-weight: 700; }
-    .col-network { color: var(--accent-info); font-weight: 600; }
-    .col-out { color: var(--accent-danger); font-weight: 600; }
-    .col-treasury { color: var(--text-ink); font-weight: 700; }
-
-    .branch-name-cell {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      text-align: right;
-    }
-    .branch-name-cell__icon {
-      width: 36px;
-      height: 36px;
-      border-radius: var(--radius-md);
-      background: var(--surface-input);
-      color: var(--text-on-input);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-heading);
-      font-weight: 800;
-      font-size: 13px;
-      flex-shrink: 0;
-    }
-    .branch-name-cell__primary {
-      font-family: var(--font-heading);
-      font-weight: 700;
-      font-size: 13.5px;
-      color: var(--text-ink);
-      cursor: pointer;
-      padding: 4px 6px;
-      border-radius: 4px;
-      border: 1px dashed transparent;
-    }
-    .branch-name-cell__primary:hover {
-      border-color: var(--border-soft);
-      background: var(--surface-canvas);
-    }
-    .branch-name-cell__primary[contenteditable="true"]:focus {
-      outline: none;
-      border-color: var(--text-ink);
-      background: #FFFFFF;
-    }
-    .branch-name-cell__secondary {
-      font-size: 11.5px;
-      color: var(--text-muted);
-      margin-top: 1px;
-    }
-
-    .row-actions {
-      display: flex;
-      gap: 4px;
-      justify-content: center;
-    }
-    .icon-btn {
-      width: 30px;
-      height: 30px;
-      border-radius: var(--radius-sm);
-      background: transparent;
-      border: 1px solid transparent;
-      color: var(--text-muted);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
-    }
-    .icon-btn:hover { background: var(--surface-hover); color: var(--text-ink); border-color: var(--border-soft); }
-    .icon-btn--danger:hover { background: var(--accent-danger-bg); color: var(--accent-danger); border-color: var(--accent-danger); }
-    .icon-btn svg { width: 14px; height: 14px; }
-
     .treasury-hero {
       background: linear-gradient(135deg, #151A29 0%, #232838 100%);
       color: #FFFFFF;
@@ -129,22 +23,16 @@
       margin-bottom: var(--space-4);
     }
     .treasury-hero__icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
+      width: 56px; height: 56px; border-radius: 50%;
       background: rgba(255,255,255,0.10);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      display: inline-flex; align-items: center; justify-content: center;
     }
     .treasury-hero__icon svg { width: 28px; height: 28px; }
     .treasury-hero__label { font-size: 12px; opacity: 0.8; margin-bottom: 4px; }
     .treasury-hero__value { font-family: var(--font-heading); font-weight: 800; font-size: 28px; }
     .treasury-hero__hint { font-size: 11.5px; opacity: 0.7; margin-top: 2px; }
     .treasury-hero__breakdown {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
+      display: flex; flex-direction: column; gap: 4px;
       padding-inline-start: 16px;
       border-inline-start: 1px solid rgba(255,255,255,0.2);
     }
@@ -161,36 +49,180 @@
       padding: 10px 14px;
       border-radius: var(--radius-md);
       font-size: 12.5px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      display: flex; align-items: center; gap: 8px;
       margin-bottom: var(--space-4);
     }
 
-    .quick-stats {
+    /* Branch cards grid - كل محل لحاله */
+    .branches-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: var(--space-3);
-      margin-bottom: var(--space-4);
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: var(--space-4);
     }
-    .quick-stat {
+
+    .branch-card {
       background: #FFFFFF;
       border: 1px solid var(--border-card);
-      border-radius: var(--radius-md);
-      padding: 14px 16px;
+      border-radius: var(--radius-lg);
       box-shadow: var(--shadow-card);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--t-fast), box-shadow var(--t-fast);
     }
-    .quick-stat__label { font-size: 11.5px; color: var(--text-muted); }
-    .quick-stat__value { font-family: var(--font-heading); font-weight: 800; font-size: 20px; color: var(--text-ink); margin-top: 4px; }
+    .branch-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-elevated);
+    }
 
-    .empty-state {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--text-muted);
+    .branch-card__header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
-    .empty-state__icon { font-size: 48px; margin-bottom: 12px; opacity: 0.3; }
-    .empty-state__title { font-family: var(--font-heading); font-weight: 700; font-size: 16px; color: var(--text-ink); margin-bottom: 8px; }
-    .empty-state__hint { font-size: 13px; }
+    .branch-card__icon {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--surface-input);
+      color: var(--text-on-input);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-family: var(--font-heading);
+      font-weight: 800; font-size: 16px;
+      flex-shrink: 0;
+    }
+    .branch-card__title {
+      font-family: var(--font-heading);
+      font-weight: 800; font-size: 16px;
+      color: var(--text-ink);
+      cursor: pointer;
+      padding: 4px 6px;
+      border-radius: 4px;
+      border: 1px dashed transparent;
+    }
+    .branch-card__title:hover { border-color: var(--border-soft); background: var(--surface-canvas); }
+    .branch-card__title[contenteditable="true"]:focus { outline: none; border-color: var(--text-ink); background: #FFFFFF; }
+    .branch-card__subtitle {
+      font-size: 11.5px; color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .branch-card__status {
+      margin-inline-start: auto;
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 3px 10px; border-radius: 999px;
+      font-size: 11.5px; font-weight: 600; white-space: nowrap;
+    }
+    .badge--success { background: var(--accent-success-bg); color: var(--accent-success); }
+    .badge--neutral { background: rgba(88, 94, 105, 0.12); color: var(--text-muted); }
+    .badge__dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    .branch-card__body { padding: 16px 20px; flex: 1; }
+
+    .branch-card__stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .branch-stat {
+      padding: 10px 12px;
+      background: var(--surface-canvas);
+      border-radius: var(--radius-sm);
+    }
+    .branch-stat__label {
+      font-size: 10.5px; color: var(--text-muted);
+      display: flex; align-items: center; gap: 4px;
+    }
+    .branch-stat__value {
+      font-family: var(--font-heading);
+      font-weight: 700; font-size: 14px;
+      color: var(--text-ink);
+      margin-top: 4px;
+    }
+    .branch-stat--cash .branch-stat__value { color: var(--accent-success); }
+    .branch-stat--network .branch-stat__value { color: var(--accent-info); }
+    .branch-stat--out .branch-stat__value { color: var(--accent-danger); }
+    .branch-stat--treasury { background: var(--text-ink); }
+    .branch-stat--treasury .branch-stat__label { color: rgba(255,255,255,0.7); }
+    .branch-stat--treasury .branch-stat__value { color: #FFFFFF; }
+
+    .branch-card__meta {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px; padding: 10px 12px;
+      background: var(--surface-canvas);
+      border-radius: var(--radius-sm);
+      margin-bottom: 12px;
+      font-size: 12px;
+    }
+    .branch-card__meta-field { display: flex; flex-direction: column; gap: 2px; }
+    .branch-card__meta-label { font-size: 10.5px; color: var(--text-muted); }
+    .branch-card__meta-value {
+      font-weight: 600; color: var(--text-ink);
+      cursor: pointer; padding: 2px 4px;
+      border-radius: 4px; border: 1px dashed transparent;
+    }
+    .branch-card__meta-value:hover { border-color: var(--border-soft); background: #FFFFFF; }
+    .branch-card__meta-value[contenteditable="true"]:focus {
+      outline: none; border-color: var(--text-ink); background: #FFFFFF;
+    }
+
+    .branch-card__closings {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-soft);
+    }
+    .branch-card__closings-title {
+      font-family: var(--font-heading);
+      font-weight: 700; font-size: 12px;
+      color: var(--text-ink);
+      margin-bottom: 8px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .branch-card__closings-list {
+      max-height: 140px; overflow-y: auto;
+      font-size: 11.5px;
+    }
+    .branch-card__closing-item {
+      display: flex; justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .branch-card__closing-item:last-child { border-bottom: none; }
+    .branch-card__closing-item-date { color: var(--text-muted); }
+    .branch-card__closing-item-amount { font-family: var(--font-heading); font-weight: 700; color: var(--text-ink); }
+    .branch-card__empty {
+      font-size: 11.5px; color: var(--text-muted);
+      text-align: center; padding: 12px;
+    }
+
+    .branch-card__actions {
+      padding: 12px 20px;
+      border-top: 1px solid var(--border-soft);
+      background: var(--surface-canvas);
+      display: flex; gap: 6px; flex-wrap: wrap;
+    }
+    .branch-card__btn {
+      flex: 1; min-width: 80px;
+      padding: 8px 12px;
+      background: #FFFFFF;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-weight: 600; font-size: 11.5px;
+      color: var(--text-ink);
+      cursor: pointer;
+      display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+    }
+    .branch-card__btn:hover { background: var(--text-ink); color: #FFFFFF; border-color: var(--text-ink); }
+    .branch-card__btn--primary { background: var(--text-ink); color: #FFFFFF; border-color: var(--text-ink); }
+    .branch-card__btn--primary:hover { background: #232838; }
+    .branch-card__btn--danger:hover { background: var(--accent-danger); color: #FFFFFF; border-color: var(--accent-danger); }
+    .branch-card__btn svg { width: 13px; height: 13px; }
 
     /* Modal */
     .modal-backdrop {
@@ -208,7 +240,7 @@
       display: flex; align-items: center; justify-content: space-between;
     }
     .modal__title { font-family: var(--font-heading); font-weight: 700; font-size: 16px; }
-    .modal__close { background: none; border: none; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; color: var(--text-muted); }
+    .modal__close { background: none; border: none; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; color: var(--text-muted); font-size: 18px; }
     .modal__close:hover { background: var(--surface-hover); color: var(--text-ink); }
     .modal__body { padding: 20px; }
     .modal__footer { padding: 12px 20px; border-top: 1px solid var(--border-soft); display: flex; gap: 8px; justify-content: flex-end; }
@@ -220,6 +252,27 @@
       border-radius: 8px; font-size: 13px; font-family: inherit;
     }
     .form-group__input:focus { outline: none; border-color: var(--text-ink); }
+
+    .empty-state {
+      text-align: center; padding: 60px 20px; color: var(--text-muted);
+      background: #FFFFFF; border: 1px dashed var(--border-soft); border-radius: var(--radius-lg);
+    }
+    .empty-state__icon { font-size: 48px; margin-bottom: 12px; opacity: 0.3; }
+    .empty-state__title { font-family: var(--font-heading); font-weight: 700; font-size: 16px; color: var(--text-ink); margin-bottom: 8px; }
+    .empty-state__hint { font-size: 13px; }
+
+    .view-toggle {
+      display: inline-flex; background: #FFFFFF;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 2px;
+    }
+    .view-toggle button {
+      padding: 6px 12px; background: transparent; border: none;
+      font-family: var(--font-heading); font-weight: 600; font-size: 12px;
+      color: var(--text-muted); cursor: pointer; border-radius: 6px;
+    }
+    .view-toggle button.is-active { background: var(--text-ink); color: #FFFFFF; }
   </style>
 </head>
 <body>
@@ -266,7 +319,7 @@
       </button>
       <div>
         <h1 class="topbar__page-title">المحلات</h1>
-        <div class="topbar__page-subtitle">أضف محلاتك، سمّيها، وأدِر حساباتها (كاش، شبكة، خرج، عهدة) · الكاش ينضاف للخزينة</div>
+        <div class="topbar__page-subtitle">كل محل حساباته منفصلة تماماً (كاش، شبكة، خرج، عهدة) · الكاش ينضاف للخزينة المركزية</div>
       </div>
       <div class="topbar__actions">
         <button class="btn btn--secondary" data-action="export"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>تصدير CSV</button>
@@ -291,50 +344,16 @@
         <div class="treasury-hero__breakdown">
           <div class="treasury-hero__item">عدد المحلات: <strong id="branches-count">٠</strong></div>
           <div class="treasury-hero__item">ورديات مفتوحة: <strong id="open-count">٠</strong></div>
+          <div class="treasury-hero__item">إيداعات: <strong id="deposits-count">٠</strong></div>
         </div>
       </div>
 
       <div class="alert-info">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-        <span><strong>انقر على اسم المحل</strong> لتعديله. استخدم أزرار العمود الأخير لإضافة ورديات أو حذف المحل.</span>
+        <span>كل محل <strong>منفصل تماماً</strong> — انقر على اسمه أو معلوماته لتعديلها. اضغط "بدء وردية" لفتح وردية في هذا المحل.</span>
       </div>
 
-      <div class="quick-stats">
-        <div class="quick-stat"><div class="quick-stat__label">إجمالي الكاش</div><div class="quick-stat__value col-cash" id="total-cash">٠٫٠٠ ر.س</div></div>
-        <div class="quick-stat"><div class="quick-stat__label">إجمالي الشبكة</div><div class="quick-stat__value col-network" id="total-network">٠٫٠٠ ر.س</div></div>
-        <div class="quick-stat"><div class="quick-stat__label">إجمالي الخرج</div><div class="quick-stat__value col-out" id="total-out">٠٫٠٠ ر.س</div></div>
-        <div class="quick-stat"><div class="quick-stat__label">إجمالي العُهد</div><div class="quick-stat__value" id="total-custody">٠٫٠٠ ر.س</div></div>
-      </div>
-
-      <div class="card">
-        <div class="card__header">
-          <div>
-            <h3 class="card__title">جدول المحلات</h3>
-            <p class="card__subtitle">انقر على اسم المحل لتعديله مباشرة</p>
-          </div>
-        </div>
-        <div class="card__body card__body--flush">
-          <div style="overflow-x: auto;">
-            <table class="branches-table" id="branches-table">
-              <thead>
-                <tr>
-                  <th>المحل</th>
-                  <th>المدير</th>
-                  <th>كاش</th>
-                  <th>شبكة</th>
-                  <th>خرج</th>
-                  <th>عُهدة</th>
-                  <th>للخزينة</th>
-                  <th>الحالة</th>
-                  <th>إجراءات</th>
-                </tr>
-              </thead>
-              <tbody id="branches-tbody"></tbody>
-              <tfoot id="branches-tfoot"></tfoot>
-            </table>
-          </div>
-        </div>
-      </div>
+      <div class="branches-grid" id="branches-grid"></div>
 
       <footer class="footer">
         <div class="footer__inner">
@@ -347,7 +366,6 @@
     </main>
   </div>
 
-  <!-- Modal: إضافة محل -->
   <div class="modal-backdrop" id="add-modal">
     <div class="modal">
       <div class="modal__header">
@@ -399,92 +417,26 @@
         return name.replace(/^فرع\s*/, "").split(" ").slice(0, 2).map((w) => w[0]).join("").toUpperCase();
       }
 
-      function getData() { return Store.get(); }
-
-      function computeBranchStats(branchId) {
-        const data = getData();
+      function computeStats(branchId) {
+        const data = Store.get();
         const closings = data.closings.filter((c) => c.branchId === branchId);
         const custody = data.custodyRecords.filter((c) => c.branchId === branchId);
+        const openShift = data.openShifts.find((s) => s.branchId === branchId && s.status === "open");
         return {
           cash: closings.reduce((s, c) => s + (c.cashSales || 0), 0),
           network: closings.reduce((s, c) => s + (c.networkSales || 0), 0),
           out: closings.reduce((s, c) => s + (c.cashOut || 0), 0),
           custody: custody.reduce((s, c) => s + (c.amount || 0), 0),
           deposits: closings.reduce((s, c) => s + (c.transferredToTreasury || 0), 0),
-          hasOpenShift: data.openShifts.some((s) => s.branchId === branchId),
+          closings,
+          openShift,
         };
       }
 
       function render() {
-        const data = getData();
+        const data = Store.get();
         const branches = data.branches || [];
-        const tbody = document.getElementById("branches-tbody");
-        const tfoot = document.getElementById("branches-tfoot");
-
-        if (branches.length === 0) {
-          tbody.innerHTML = `
-            <tr><td colspan="9">
-              <div class="empty-state">
-                <div class="empty-state__icon">🏪</div>
-                <div class="empty-state__title">لا توجد محلات بعد</div>
-                <div class="empty-state__hint">اضغط على زر "إضافة محل" بالأعلى لبدء إدارة محلاتك</div>
-              </div>
-            </td></tr>`;
-          tfoot.innerHTML = "";
-        } else {
-          tbody.innerHTML = branches.map((b) => {
-            const stats = computeBranchStats(b.id);
-            return `
-              <tr data-branch-id="${b.id}">
-                <td class="col-name">
-                  <div class="branch-name-cell">
-                    <div class="branch-name-cell__icon">${branchInitials(b.name)}</div>
-                    <div>
-                      <div class="branch-name-cell__primary" contenteditable="true" data-field="name" data-id="${b.id}">${b.name || "بدون اسم"}</div>
-                      <div class="branch-name-cell__secondary" contenteditable="true" data-field="location" data-id="${b.id}">${b.location || "—"}</div>
-                    </div>
-                  </div>
-                </td>
-                <td contenteditable="true" data-field="manager" data-id="${b.id}">${b.manager || "—"}</td>
-                <td class="num col-cash">${formatNum(stats.cash)}</td>
-                <td class="num col-network">${formatNum(stats.network)}</td>
-                <td class="num col-out">${formatNum(stats.out)}</td>
-                <td class="num">${formatNum(stats.custody)}</td>
-                <td class="num col-treasury">${formatNum(stats.deposits)}</td>
-                <td>${stats.hasOpenShift ? '<span class="badge badge--success"><span class="badge__dot"></span>مفتوحة</span>' : '<span class="badge badge--neutral">مغلقة</span>'}</td>
-                <td>
-                  <div class="row-actions">
-                    <button class="icon-btn" data-action="start-shift" data-id="${b.id}" title="بدء وردية جديدة">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                    </button>
-                    <a class="icon-btn" href="./closing.html" title="إقفال وردية">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-                    </a>
-                    <button class="icon-btn icon-btn--danger" data-action="delete-branch" data-id="${b.id}" title="حذف المحل">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
-                    </button>
-                  </div>
-                </td>
-              </tr>`;
-          }).join("");
-
-          // Totals
-          let totalCash = 0, totalNet = 0, totalOut = 0, totalCust = 0, totalDep = 0;
-          branches.forEach((b) => {
-            const s = computeBranchStats(b.id);
-            totalCash += s.cash; totalNet += s.network; totalOut += s.out; totalCust += s.custody; totalDep += s.deposits;
-          });
-          tfoot.innerHTML = `
-            <tr>
-              <td colspan="2">الإجمالي</td>
-              <td class="num col-cash">${formatNum(totalCash)}</td>
-              <td class="num col-network">${formatNum(totalNet)}</td>
-              <td class="num col-out">${formatNum(totalOut)}</td>
-              <td class="num">${formatNum(totalCust)}</td>
-              <td class="num col-treasury">${formatNum(totalDep)}</td>
-              <td colspan="2">—</td>
-            </tr>`;
-        }
+        const grid = document.getElementById("branches-grid");
 
         // Treasury
         const treasuryTotal = data.treasuryMovements.reduce((s, t) => s + t.amount, 0);
@@ -492,24 +444,110 @@
         document.getElementById("treasury-meta").textContent = `${data.treasuryMovements.length} إيداع في الخزينة`;
         document.getElementById("branches-count").textContent = ui.formatNumber(branches.length);
         document.getElementById("open-count").textContent = ui.formatNumber(data.openShifts.length);
+        document.getElementById("deposits-count").textContent = ui.formatNumber(data.treasuryMovements.length);
 
-        // Quick stats
-        const allCash = data.closings.reduce((s, c) => s + c.cashSales, 0);
-        const allNet = data.closings.reduce((s, c) => s + c.networkSales, 0);
-        const allOut = data.closings.reduce((s, c) => s + c.cashOut, 0);
-        const allCust = data.custodyRecords.reduce((s, c) => s + c.amount, 0);
-        document.getElementById("total-cash").textContent = ui.formatCurrency(allCash, "ر.س");
-        document.getElementById("total-network").textContent = ui.formatCurrency(allNet, "ر.س");
-        document.getElementById("total-out").textContent = ui.formatCurrency(allOut, "ر.س");
-        document.getElementById("total-custody").textContent = ui.formatCurrency(allCust, "ر.س");
+        if (branches.length === 0) {
+          grid.innerHTML = `
+            <div class="empty-state" style="grid-column: 1/-1;">
+              <div class="empty-state__icon">🏪</div>
+              <div class="empty-state__title">لا توجد محلات بعد</div>
+              <div class="empty-state__hint">اضغط على زر "إضافة محل" بالأعلى لبدء إدارة محلاتك</div>
+            </div>`;
+          return;
+        }
 
-        // bind inline edits
-        bindInlineEdits();
-        // bind row actions
-        bindRowActions();
+        grid.innerHTML = branches.map((b) => {
+          const stats = computeStats(b.id);
+          return `
+            <article class="branch-card" data-branch-id="${b.id}">
+              <header class="branch-card__header">
+                <div class="branch-card__icon">${branchInitials(b.name)}</div>
+                <div style="flex: 1; min-width: 0;">
+                  <div class="branch-card__title" contenteditable="true" data-field="name" data-id="${b.id}" spellcheck="false">${b.name || "بدون اسم"}</div>
+                  <div class="branch-card__subtitle" contenteditable="true" data-field="location" data-id="${b.id}" spellcheck="false">${b.location || "—"}</div>
+                </div>
+                <div class="branch-card__status">
+                  ${stats.openShift
+                    ? '<span class="badge badge--success"><span class="badge__dot"></span>وردية مفتوحة</span>'
+                    : '<span class="badge badge--neutral">لا توجد ورديات</span>'}
+                </div>
+              </header>
+
+              <div class="branch-card__body">
+                <div class="branch-card__meta">
+                  <div class="branch-card__meta-field">
+                    <span class="branch-card__meta-label">المدير</span>
+                    <span class="branch-card__meta-value" contenteditable="true" data-field="manager" data-id="${b.id}" spellcheck="false">${b.manager || "—"}</span>
+                  </div>
+                  <div class="branch-card__meta-field">
+                    <span class="branch-card__meta-label">الهاتف</span>
+                    <span class="branch-card__meta-value" contenteditable="true" data-field="phone" data-id="${b.id}" spellcheck="false">${b.phone || "—"}</span>
+                  </div>
+                </div>
+
+                <div class="branch-card__stats">
+                  <div class="branch-stat branch-stat--cash">
+                    <div class="branch-stat__label">💵 كاش</div>
+                    <div class="branch-stat__value">${formatNum(stats.cash)}</div>
+                  </div>
+                  <div class="branch-stat branch-stat--network">
+                    <div class="branch-stat__label">💳 شبكة</div>
+                    <div class="branch-stat__value">${formatNum(stats.network)}</div>
+                  </div>
+                  <div class="branch-stat branch-stat--out">
+                    <div class="branch-stat__label">📉 خرج</div>
+                    <div class="branch-stat__value">${formatNum(stats.out)}</div>
+                  </div>
+                  <div class="branch-stat">
+                    <div class="branch-stat__label">📦 عُهدة</div>
+                    <div class="branch-stat__value">${formatNum(stats.custody)}</div>
+                  </div>
+                  <div class="branch-stat branch-stat--treasury" style="grid-column: 1/-1;">
+                    <div class="branch-stat__label">→ إلى الخزينة</div>
+                    <div class="branch-stat__value">${formatNum(stats.deposits)} ر.س</div>
+                  </div>
+                </div>
+
+                <div class="branch-card__closings">
+                  <div class="branch-card__closings-title">
+                    <span>آخر إقفالات هذا المحل</span>
+                    <span style="font-size: 11px; color: var(--text-muted);">${stats.closings.length}</span>
+                  </div>
+                  <div class="branch-card__closings-list">
+                    ${stats.closings.length === 0
+                      ? '<div class="branch-card__empty">لا توجد إقفالات بعد</div>'
+                      : stats.closings.slice(0, 4).map((c) => `
+                        <div class="branch-card__closing-item">
+                          <span class="branch-card__closing-item-date">${c.date} · ${c.shiftType}</span>
+                          <span class="branch-card__closing-item-amount">${formatNum(c.transferredToTreasury)} ر.س</span>
+                        </div>
+                      `).join("")
+                    }
+                  </div>
+                </div>
+              </div>
+
+              <footer class="branch-card__actions">
+                <button class="branch-card__btn" data-action="start-shift" data-id="${b.id}" title="بدء وردية جديدة">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  بدء وردية
+                </button>
+                <a class="branch-card__btn" href="./closing.html" data-action="go-close">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                  إقفال
+                </a>
+                <button class="branch-card__btn branch-card__btn--danger" data-action="delete-branch" data-id="${b.id}" title="حذف">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6"/></svg>
+                </button>
+              </footer>
+            </article>`;
+        }).join("");
+
+        bindCardEvents();
       }
 
-      function bindInlineEdits() {
+      function bindCardEvents() {
+        // Inline edits
         document.querySelectorAll("[contenteditable='true']").forEach((el) => {
           if (el.dataset.bound) return;
           el.dataset.bound = "1";
@@ -519,38 +557,41 @@
             const value = el.textContent.trim();
             Store.updateBranch(id, { [field]: value });
             render();
-            showToast("تم حفظ التغييرات ✓");
+            showToast("تم الحفظ ✓");
           });
           el.addEventListener("keydown", (e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              el.blur();
-            }
+            if (e.key === "Enter") { e.preventDefault(); el.blur(); }
           });
         });
-      }
 
-      function bindRowActions() {
+        // Start shift
         document.querySelectorAll("[data-action='start-shift']").forEach((btn) => {
           if (btn.dataset.bound) return;
           btn.dataset.bound = "1";
           btn.addEventListener("click", (e) => {
-            e.stopPropagation();
+            e.preventDefault();
             const id = parseInt(btn.dataset.id, 10);
             const branch = Store.get().branches.find((b) => b.id === id);
-            const shift = Store.startShift(id, "صباحية", "—", 0, 0);
-            showToast(`تم بدء وردية صباحية في ${branch.name} ✓`);
+            const data = Store.get();
+            if (data.openShifts.some((s) => s.branchId === id)) {
+              showToast("يوجد وردية مفتوحة بالفعل في " + branch.name, "warn");
+              return;
+            }
+            Store.startShift(id, "صباحية", "—", 0, 0);
+            showToast("تم بدء وردية صباحية في " + branch.name + " ✓");
             render();
           });
         });
+
+        // Delete
         document.querySelectorAll("[data-action='delete-branch']").forEach((btn) => {
           if (btn.dataset.bound) return;
           btn.dataset.bound = "1";
           btn.addEventListener("click", (e) => {
-            e.stopPropagation();
+            e.preventDefault();
             const id = parseInt(btn.dataset.id, 10);
             const branch = Store.get().branches.find((b) => b.id === id);
-            if (confirm(`هل أنت متأكد من حذف "${branch.name}" وكل بياناته؟`)) {
+            if (confirm("هل أنت متأكد من حذف \"" + branch.name + "\" وكل بياناته؟")) {
               Store.deleteBranch(id);
               showToast("تم حذف المحل");
               render();
@@ -577,10 +618,7 @@
       });
       document.querySelector("[data-action='save-branch']")?.addEventListener("click", () => {
         const name = document.getElementById("b-name").value.trim();
-        if (!name) {
-          showToast("الرجاء إدخال اسم المحل", "warn");
-          return;
-        }
+        if (!name) { showToast("الرجاء إدخال اسم المحل", "warn"); return; }
         const branch = Store.addBranch({
           name,
           location: document.getElementById("b-location").value.trim(),
@@ -588,7 +626,7 @@
           phone: document.getElementById("b-phone").value.trim(),
         });
         modal.classList.remove("is-open");
-        showToast(`تم إضافة "${branch.name}" ✓`);
+        showToast("تم إضافة \"" + branch.name + "\" ✓");
         render();
       });
 
@@ -597,7 +635,6 @@
         Store.exportCSV("branches", "branches.csv");
       });
 
-      // Toast
       function showToast(msg, type) {
         let toast = document.getElementById("toast");
         if (!toast) {
@@ -615,7 +652,6 @@
         window._toastTimer = setTimeout(() => { toast.style.opacity = "0"; }, 2200);
       }
 
-      // First render
       render();
     })();
   </script>
