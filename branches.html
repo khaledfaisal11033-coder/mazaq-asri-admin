@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>المحلات · شركة المذاق العصري</title>
   <link rel="icon" type="image/svg+xml" href="./logo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -250,7 +253,7 @@
       </div>
       <div class="topbar__actions">
         <button class="btn btn--secondary" data-action="export-all"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>تصدير الكل</button>
-        <button class="btn btn--primary" data-action="add-branch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>إضافة محل</button>
+        <button class="btn btn--primary" data-action="add-branch" onclick="window.__openAddBranch && window.__openAddBranch()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>إضافة محل</button>
       </div>
     </header>
 
@@ -567,14 +570,32 @@
       }
 
       const addModal = document.getElementById("add-modal");
-      document.querySelector("[data-action='add-branch']")?.addEventListener("click", () => {
-        document.getElementById("b-name").value = "";
-        document.getElementById("b-location").value = "";
-        document.getElementById("b-manager").value = "";
-        document.getElementById("b-phone").value = "";
-        addModal.classList.add("is-open");
-        setTimeout(() => document.getElementById("b-name").focus(), 100);
-      });
+
+      function openAddBranch() {
+        try {
+          document.getElementById("b-name").value = "";
+          document.getElementById("b-location").value = "";
+          document.getElementById("b-manager").value = "";
+          document.getElementById("b-phone").value = "";
+          addModal.classList.add("is-open");
+          setTimeout(() => {
+            const n = document.getElementById("b-name");
+            if (n) n.focus();
+          }, 100);
+        } catch (e) {
+          alert("خطأ: " + e.message + "\n\n جرّب تحديث الصفحة (Ctrl+F5)");
+        }
+      }
+
+      // expose globally for inline onclick fallback
+      window.__openAddBranch = openAddBranch;
+
+      const addBtn = document.querySelector("[data-action='add-branch']");
+      if (addBtn) {
+        addBtn.addEventListener("click", openAddBranch);
+      } else {
+        console.warn("زر إضافة محل غير موجود في DOM");
+      }
 
       const closeShiftModal = document.getElementById("close-modal");
       let currentClosingBranchId = null;
