@@ -1,0 +1,912 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>الإقفال والورديات · شركة المذاق العصري</title>
+  <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./dashboard.css" />
+  <style>
+    .tabs {
+      display: flex;
+      gap: 4px;
+      border-bottom: 1px solid var(--border-soft);
+      margin-bottom: var(--space-4);
+      overflow-x: auto;
+    }
+    .tab {
+      padding: 10px 18px;
+      background: transparent;
+      border: none;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      font-size: 13.5px;
+      color: var(--text-muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      white-space: nowrap;
+      transition: color var(--t-fast), border-color var(--t-fast);
+    }
+    .tab:hover { color: var(--text-ink); }
+    .tab.is-active { color: var(--text-ink); border-bottom-color: var(--text-ink); }
+    .tab-panel { display: none; }
+    .tab-panel.is-active { display: block; }
+
+    /* Closing form */
+    .closing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 720px) { .closing-grid { grid-template-columns: 1fr; } }
+    .closing-field { display: flex; flex-direction: column; gap: 6px; }
+    .closing-field__label { font-size: 12.5px; font-weight: 600; color: var(--text-ink); }
+    .closing-field__hint { font-size: 11px; color: var(--text-muted); }
+    .closing-field input {
+      width: 100%;
+      background: #FFFFFF;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      font-size: 14px;
+      font-family: var(--font-heading);
+      font-weight: 600;
+      color: var(--text-ink);
+    }
+    .closing-field input:focus { outline: none; border-color: var(--text-ink); }
+    .closing-field input[readonly] { background: var(--surface-canvas); color: var(--text-muted); }
+    .closing-field--calculated input { background: var(--surface-active); }
+
+    /* Branch card */
+    .branch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+    .branch-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-card);
+      border-radius: var(--radius-lg);
+      padding: 18px;
+      box-shadow: var(--shadow-card);
+    }
+    .branch-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+    .branch-card__name {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .branch-card__meta {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .branch-card__stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .branch-stat { padding: 8px; background: var(--surface-canvas); border-radius: 6px; }
+    .branch-stat__label { font-size: 10.5px; color: var(--text-muted); }
+    .branch-stat__value { font-family: var(--font-heading); font-weight: 700; font-size: 13px; margin-top: 2px; }
+
+    /* Treasury banner */
+    .treasury-banner {
+      background: linear-gradient(135deg, #151A29 0%, #232838 100%);
+      color: #FFFFFF;
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: var(--space-4);
+    }
+    .treasury-banner__label { font-size: 13px; opacity: 0.8; }
+    .treasury-banner__value { font-family: var(--font-heading); font-weight: 800; font-size: 32px; }
+    .treasury-banner__hint { font-size: 11.5px; opacity: 0.7; }
+    .treasury-banner__icon {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.10);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .treasury-banner__icon svg { width: 28px; height: 28px; }
+
+    /* Step indicator */
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .step:last-child { border-bottom: none; }
+    .step__number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--surface-input);
+      color: var(--text-on-input);
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .step__body { flex: 1; }
+    .step__title { font-family: var(--font-heading); font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+    .step__desc { font-size: 12.5px; color: var(--text-muted); }
+
+    .flow-diagram {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 16px;
+      background: var(--surface-canvas);
+      border-radius: var(--radius-md);
+      margin: 12px 0;
+    }
+    .flow-box {
+      padding: 12px;
+      background: #FFFFFF;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      border: 1px solid var(--border-soft);
+    }
+    .flow-box__label { font-size: 11px; color: var(--text-muted); }
+    .flow-box__value { font-family: var(--font-heading); font-weight: 700; font-size: 16px; margin-top: 4px; }
+    .flow-arrow { font-size: 20px; color: var(--text-muted); }
+    .flow-box--treasury { background: var(--text-ink); color: #FFFFFF; border-color: var(--text-ink); }
+    .flow-box--treasury .flow-box__label { color: rgba(255,255,255,0.7); }
+    .flow-box--treasury .flow-box__value { color: #FFFFFF; }
+
+    .alert-info {
+      background: var(--accent-info-bg);
+      color: var(--accent-info);
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      font-size: 12.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .alert-success {
+      background: var(--accent-success-bg);
+      color: var(--accent-success);
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      font-size: 12.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .alert-warning {
+      background: var(--accent-warning-bg);
+      color: var(--accent-warning);
+      padding: 10px 14px;
+      border-radius: var(--radius-md);
+      font-size: 12.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar-backdrop"></div>
+  <div class="admin-shell">
+    <aside class="sidebar">
+      <div class="sidebar__brand">
+        <img src="./logo.svg" alt="" />
+        <div class="sidebar__brand-text">
+          <span class="sidebar__brand-title">المذاق العصري</span>
+          <span class="sidebar__brand-subtitle">لوحة الإدارة</span>
+        </div>
+      </div>
+      <div class="sidebar__section">
+        <div class="sidebar__heading">القائمة الرئيسية</div>
+        <ul class="sidebar__nav">
+          <li><a class="nav-item" href="./dashboard.html" data-nav="dashboard.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>لوحة التحكم</a></li>
+          <li><a class="nav-item" href="./orders.html" data-nav="orders.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>الطلبات</a></li>
+          <li><a class="nav-item" href="./reports.html" data-nav="reports.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>المالية والتقارير</a></li>
+          <li><a class="nav-item" href="./menu.html" data-nav="menu.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg>المنيو</a></li>
+          <li><a class="nav-item" href="./inventory.html" data-nav="inventory.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>المخزون</a></li>
+          <li><a class="nav-item" href="./staff.html" data-nav="staff.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>الموظفين</a></li>
+          <li><a class="nav-item" href="./closing.html" data-nav="closing.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>الإقفال والورديات<span class="nav-item__badge" data-bind="open-shifts-count">—</span></a></li>
+        </ul>
+      </div>
+      <div class="sidebar__section">
+        <div class="sidebar__heading">النظام</div>
+        <ul class="sidebar__nav">
+          <li><a class="nav-item" href="./settings.html" data-nav="settings.html"><svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>الإعدادات</a></li>
+        </ul>
+      </div>
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" data-user-avatar>م</div>
+          <div class="sidebar__user-info">
+            <div class="sidebar__user-name" data-user-name>المستخدم</div>
+            <div class="sidebar__user-role" data-user-role>مدير</div>
+          </div>
+          <button class="sidebar__logout" data-action="logout" title="تسجيل الخروج"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></button>
+        </div>
+      </div>
+    </aside>
+
+    <header class="topbar">
+      <button class="topbar__menu-btn" data-action="toggle-menu" aria-label="القائمة">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div>
+        <h1 class="topbar__page-title">الإقفال والورديات</h1>
+        <div class="topbar__page-subtitle">إقفال الورديات وتحويل الكاش للخزينة المركزية</div>
+      </div>
+      <div class="topbar__actions">
+        <button class="btn btn--secondary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>تصدير</button>
+        <button class="btn btn--primary" data-action="new-shift"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>بدء وردية</button>
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- Treasury banner (aggregated cash) -->
+      <div class="treasury-banner">
+        <div style="display: flex; align-items: center; gap: 16px;">
+          <div class="treasury-banner__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="6" width="20" height="12" rx="2"/>
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M6 12h.01M18 12h.01"/>
+            </svg>
+          </div>
+          <div>
+            <div class="treasury-banner__label">الخزينة المركزية (كاش مجمّع من جميع الفروع)</div>
+            <div class="treasury-banner__value" data-bind="treasury-total">—</div>
+            <div class="treasury-banner__hint" data-bind="treasury-meta">—</div>
+          </div>
+        </div>
+        <div style="text-align: end;">
+          <div style="font-size: 12px; opacity: 0.8;">عدد الحركات</div>
+          <div style="font-family: var(--font-heading); font-weight: 800; font-size: 22px;" data-bind="treasury-count">—</div>
+        </div>
+      </div>
+
+      <div class="alert-info">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <span>كل حساب <strong>لكل محل لحاله</strong> (شبكة، خرج، عهدة) — <strong>الكاش فقط</strong> يتجمع تلقائياً في الخزينة المركزية.</span>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab is-active" data-tab="open">الورديات المفتوحة</button>
+        <button class="tab" data-tab="close">إقفال وردية</button>
+        <button class="tab" data-tab="custody">العُهد</button>
+        <button class="tab" data-tab="history">سجل الإقفالات</button>
+        <button class="tab" data-tab="treasury">حركة الخزينة</button>
+      </div>
+
+      <!-- Tab: Open shifts -->
+      <div class="tab-panel is-active" data-panel="open">
+        <div class="stats">
+          <article class="stat-card">
+            <div class="stat-card__label">ورديات مفتوحة الآن</div>
+            <div class="stat-card__value" data-bind="open-shifts-stat">—</div>
+            <div class="stat-card__hint">في جميع الفروع</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-card__label">فروع نشطة</div>
+            <div class="stat-card__value" data-bind="active-branches">—</div>
+            <div class="stat-card__hint">من أصل — فرع</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-card__label">عُهد نشطة</div>
+            <div class="stat-card__value" data-bind="active-custody">—</div>
+            <div class="stat-card__hint">عُهد تحت يد العمال</div>
+          </article>
+          <article class="stat-card">
+            <div class="stat-card__label">إجمالي العُهد</div>
+            <div class="stat-card__value" data-bind="total-custody">—</div>
+            <div class="stat-card__hint">مجموع العُهد في الفروع</div>
+          </article>
+        </div>
+
+        <div class="card">
+          <div class="card__header">
+            <div>
+              <h3 class="card__title">الورديات الحالية في كل فرع</h3>
+              <p class="card__subtitle">اختر فرع لإقفال ورديته أو متابعة التفاصيل</p>
+            </div>
+          </div>
+          <div class="card__body">
+            <div class="branch-grid" id="open-shifts-grid"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Close shift -->
+      <div class="tab-panel" data-panel="close">
+        <div class="card">
+          <div class="card__header">
+            <div>
+              <h3 class="card__title">إقفال وردية</h3>
+              <p class="card__subtitle">تسجيل تفاصيل الكاش، الشبكة، الخرج، والعهدة</p>
+            </div>
+          </div>
+          <div class="card__body">
+            <!-- اختيار الفرع والوردية -->
+            <div class="closing-grid" style="margin-bottom: var(--space-4);">
+              <div class="closing-field">
+                <label class="closing-field__label">الفرع</label>
+                <select id="close-branch" class="form-field__input" style="background:#fff; border:1px solid var(--border-soft); border-radius: var(--radius-md); padding: 10px 12px; font-size: 13px;">
+                  <option value="">— اختر الفرع —</option>
+                </select>
+              </div>
+              <div class="closing-field">
+                <label class="closing-field__label">الوردية</label>
+                <select id="close-shift" class="form-field__input" style="background:#fff; border:1px solid var(--border-soft); border-radius: var(--radius-md); padding: 10px 12px; font-size: 13px;">
+                  <option value="">— اختر الوردية —</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="close-empty" class="empty">
+              <svg class="empty__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+              <p>اختر الفرع والوردية لبدء الإقفال</p>
+            </div>
+
+            <div id="close-form" style="display: none;">
+              <!-- بيانات الوردية -->
+              <div class="alert-info">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <span id="close-shift-info">—</span>
+              </div>
+
+              <h4 style="font-family: var(--font-heading); font-weight: 700; font-size: 14px; margin: 16px 0 10px;">١. المبيعات</h4>
+              <div class="closing-grid">
+                <div class="closing-field">
+                  <label class="closing-field__label">مبيعات نقدية (كاش)</label>
+                  <input type="number" id="f-cash" value="0" min="0" step="0.01" />
+                  <span class="closing-field__hint">يتم تحويلها للخزينة المركزية</span>
+                </div>
+                <div class="closing-field">
+                  <label class="closing-field__label">مبيعات شبكة</label>
+                  <input type="number" id="f-network" value="0" min="0" step="0.01" />
+                  <span class="closing-field__hint">تذهب مباشرة لحساب الفرع البنكي</span>
+                </div>
+              </div>
+
+              <h4 style="font-family: var(--font-heading); font-weight: 700; font-size: 14px; margin: 20px 0 10px;">٢. الخرج (المصروفات)</h4>
+              <div class="closing-field">
+                <label class="closing-field__label">إجمالي الخرج</label>
+                <input type="number" id="f-out" value="0" min="0" step="0.01" />
+                <span class="closing-field__hint">يخصم من حساب الفرع (لا يذهب للخزينة)</span>
+              </div>
+
+              <h4 style="font-family: var(--font-heading); font-weight: 700; font-size: 14px; margin: 20px 0 10px;">٣. العهدة</h4>
+              <div class="closing-grid">
+                <div class="closing-field">
+                  <label class="closing-field__label">عهدة بداية الوردية</label>
+                  <input type="number" id="f-custody-start" value="500" min="0" step="0.01" readonly />
+                </div>
+                <div class="closing-field">
+                  <label class="closing-field__label">المستهلك من العهدة</label>
+                  <input type="number" id="f-custody-used" value="0" min="0" step="0.01" />
+                </div>
+              </div>
+              <div class="closing-field" style="margin-top: 10px;">
+                <label class="closing-field__label">العهدة المتبقية (تُعاد للمدير)</label>
+                <input type="number" id="f-custody-end" value="500" min="0" step="0.01" readonly class="closing-field--calculated" />
+              </div>
+
+              <h4 style="font-family: var(--font-heading); font-weight: 700; font-size: 14px; margin: 20px 0 10px;">٤. النقد الفعلي في الدرج</h4>
+              <div class="closing-grid">
+                <div class="closing-field">
+                  <label class="closing-field__label">النقد المتوقع</label>
+                  <input type="number" id="f-expected" value="0" readonly class="closing-field--calculated" />
+                  <span class="closing-field__hint">افتتاحي + كاش + عهدة - خرج</span>
+                </div>
+                <div class="closing-field">
+                  <label class="closing-field__label">النقد الفعلي (المُعد)</label>
+                  <input type="number" id="f-actual" value="0" min="0" step="0.01" />
+                  <span class="closing-field__hint">ما تم عدّه فعلياً في الصندوق</span>
+                </div>
+              </div>
+
+              <!-- مخطط التدفق -->
+              <div class="flow-diagram">
+                <div class="flow-box">
+                  <div class="flow-box__label">المبيعات النقدية</div>
+                  <div class="flow-box__value" id="flow-cash">٠ ر.س</div>
+                </div>
+                <div class="flow-arrow">→</div>
+                <div class="flow-box flow-box--treasury">
+                  <div class="flow-box__label">إلى الخزينة المركزية</div>
+                  <div class="flow-box__value" id="flow-treasury">٠ ر.س</div>
+                </div>
+              </div>
+
+              <!-- ملخص -->
+              <div id="summary-box"></div>
+
+              <div class="closing-field" style="margin-top: 16px;">
+                <label class="closing-field__label">ملاحظات</label>
+                <textarea id="f-notes" rows="2" style="background:#fff; border:1px solid var(--border-soft); border-radius: var(--radius-md); padding: 10px 12px; font-size: 13px; font-family: inherit;" placeholder="أي ملاحظات على الإقفال (اختياري)"></textarea>
+              </div>
+
+              <div style="display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px;">
+                <button class="btn btn--secondary" data-action="reset-form">إلغاء</button>
+                <button class="btn btn--primary" data-action="submit-close">تأكيد الإقفال وتحويل الكاش</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Custody -->
+      <div class="tab-panel" data-panel="custody">
+        <div class="card">
+          <div class="card__header">
+            <div>
+              <h3 class="card__title">العُهد الحالية</h3>
+              <p class="card__subtitle">المبالغ التي تركها المدير عند العمال للمصاريف التشغيلية</p>
+            </div>
+            <button class="btn btn--primary btn--sm">عهدة جديدة</button>
+          </div>
+          <div class="card__body card__body--flush">
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>الفرع</th>
+                    <th>المدير</th>
+                    <th>العامل</th>
+                    <th>المبلغ</th>
+                    <th>الغرض</th>
+                    <th>تاريخ التسليم</th>
+                    <th>الحالة</th>
+                  </tr>
+                </thead>
+                <tbody id="custody-tbody">
+                  <tr><td colspan="7" style="text-align:center; padding: 32px; color: var(--text-muted)">جاري التحميل…</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: History -->
+      <div class="tab-panel" data-panel="history">
+        <div class="card">
+          <div class="card__header">
+            <div>
+              <h3 class="card__title">سجل الإقفالات</h3>
+              <p class="card__subtitle">جميع إقفالات الورديات السابقة</p>
+            </div>
+            <select class="select" id="history-filter">
+              <option value="">جميع الفروع</option>
+            </select>
+          </div>
+          <div class="card__body card__body--flush">
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>الفرع</th>
+                    <th>الوردية</th>
+                    <th>العامل</th>
+                    <th>كاش</th>
+                    <th>شبكة</th>
+                    <th>خرج</th>
+                    <th>عهدة مستخدمة</th>
+                    <th>المحول للخزينة</th>
+                    <th>الفرق</th>
+                  </tr>
+                </thead>
+                <tbody id="history-tbody">
+                  <tr><td colspan="10" style="text-align:center; padding: 32px; color: var(--text-muted)">جاري التحميل…</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Treasury -->
+      <div class="tab-panel" data-panel="treasury">
+        <div class="card">
+          <div class="card__header">
+            <div>
+              <h3 class="card__title">حركة الخزينة المركزية</h3>
+              <p class="card__subtitle">إيداعات الكاش من جميع الفروع</p>
+            </div>
+          </div>
+          <div class="card__body card__body--flush">
+            <div class="table-wrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>التاريخ</th>
+                    <th>الفرع</th>
+                    <th>المبلغ المُودَع</th>
+                    <th>المصدر</th>
+                    <th>الحالة</th>
+                  </tr>
+                </thead>
+                <tbody id="treasury-tbody">
+                  <tr><td colspan="5" style="text-align:center; padding: 32px; color: var(--text-muted)">جاري التحميل…</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="footer__inner">
+          <span class="footer__version">الإصدار <span id="app-version">v1.0.0</span></span>
+          <span class="footer__sep">·</span>
+          <a class="footer__domain" href="https://modrtn-taste-company.pages.dev" target="_blank" rel="noopener">modrtn-taste-company.pages.dev</a>
+        </div>
+        <div class="footer__copy">© ٢٠٢٦ شركة المذاق العصري — جميع الحقوق محفوظة.</div>
+      </footer>
+    </main>
+  </div>
+
+  <script src="./config.js"></script>
+  <script src="./mock-data.js"></script>
+  <script src="./dashboard.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      const data = window.MOCK_DATA;
+      const ui = window.UI;
+      const branches = data.branches;
+      const openShifts = data.openShifts;
+      const closings = data.closings;
+      const treasury = data.treasuryMovements;
+      const custody = data.custodyRecords;
+
+      function branchName(id) {
+        const b = branches.find((x) => x.id === id);
+        return b ? b.name : "—";
+      }
+
+      /* ---------- Treasury banner ---------- */
+      const treasuryTotal = treasury.reduce((s, t) => s + t.amount, 0);
+      document.querySelector("[data-bind='treasury-total']").textContent = ui.formatCurrency(treasuryTotal, "ر.س");
+      document.querySelector("[data-bind='treasury-count']").textContent = ui.formatNumber(treasury.length);
+      const lastDate = treasury[0]?.date || "—";
+      document.querySelector("[data-bind='treasury-meta']").textContent = `آخر إيداع: ${lastDate} · ${branches.length} فروع`;
+
+      /* ---------- Open shifts stats ---------- */
+      document.querySelector("[data-bind='open-shifts-stat']").textContent = ui.formatNumber(openShifts.length);
+      document.querySelector("[data-bind='open-shifts-count']").textContent = ui.formatNumber(openShifts.length);
+      document.querySelector("[data-bind='active-branches']").textContent = ui.formatNumber(openShifts.length);
+      document.querySelector("[data-bind='active-custody']").textContent = ui.formatNumber(custody.length);
+      document.querySelector("[data-bind='total-custody']").textContent = ui.formatCurrency(custody.reduce((s, c) => s + c.amount, 0), "ر.س");
+
+      /* ---------- Open shifts grid ---------- */
+      const grid = document.getElementById("open-shifts-grid");
+      if (grid) {
+        grid.innerHTML = openShifts.map((s) => `
+          <div class="branch-card">
+            <div class="branch-card__header">
+              <div>
+                <div class="branch-card__name">${branchName(s.branchId)}</div>
+                <div class="branch-card__meta">${branches.find((b) => b.id === s.branchId)?.location || ""}</div>
+              </div>
+              <span class="badge badge--success"><span class="badge__dot"></span>مفتوحة</span>
+            </div>
+            <div class="branch-card__stats">
+              <div class="branch-stat">
+                <div class="branch-stat__label">الوردية</div>
+                <div class="branch-stat__value">${s.shiftType}</div>
+              </div>
+              <div class="branch-stat">
+                <div class="branch-stat__label">العامل</div>
+                <div class="branch-stat__value">${s.worker}</div>
+              </div>
+              <div class="branch-stat">
+                <div class="branch-stat__label">افتتاحي</div>
+                <div class="branch-stat__value">${ui.formatCurrency(s.openingBalance, "ر.س")}</div>
+              </div>
+              <div class="branch-stat">
+                <div class="branch-stat__label">عهدة</div>
+                <div class="branch-stat__value">${ui.formatCurrency(s.custodyAmount, "ر.س")}</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; margin-top: 12px;">
+              <button class="btn btn--primary btn--sm" style="flex: 1;" data-close-shift="${s.id}">إقفال الوردية</button>
+              <button class="btn btn--secondary btn--sm" data-view-shift="${s.id}">تفاصيل</button>
+            </div>
+          </div>
+        `).join("");
+
+        grid.querySelectorAll("[data-close-shift]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const shiftId = parseInt(btn.dataset.closeShift, 10);
+            switchToCloseTab(shiftId);
+          });
+        });
+      }
+
+      /* ---------- Tabs ---------- */
+      document.querySelectorAll(".tab").forEach((tab) => {
+        tab.addEventListener("click", () => {
+          const target = tab.dataset.tab;
+          document.querySelectorAll(".tab").forEach((t) => t.classList.remove("is-active"));
+          document.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("is-active"));
+          tab.classList.add("is-active");
+          document.querySelector(`[data-panel="${target}"]`).classList.add("is-active");
+        });
+      });
+
+      function switchToCloseTab(shiftId) {
+        document.querySelectorAll(".tab").forEach((t) => t.classList.remove("is-active"));
+        document.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("is-active"));
+        document.querySelector('[data-tab="close"]').classList.add("is-active");
+        document.querySelector('[data-panel="close"]').classList.add("is-active");
+        if (shiftId) {
+          const shift = openShifts.find((s) => s.id === shiftId);
+          if (shift) {
+            document.getElementById("close-branch").value = String(shift.branchId);
+            loadShiftsForBranch();
+            setTimeout(() => {
+              document.getElementById("close-shift").value = String(shiftId);
+              loadShiftData();
+            }, 50);
+          }
+        }
+      }
+
+      /* ---------- Close shift form ---------- */
+      const branchSel = document.getElementById("close-branch");
+      const shiftSel = document.getElementById("close-shift");
+      const closeForm = document.getElementById("close-form");
+      const closeEmpty = document.getElementById("close-empty");
+
+      branches.forEach((b) => {
+        const opt = document.createElement("option");
+        opt.value = String(b.id);
+        opt.textContent = b.name;
+        branchSel.appendChild(opt);
+      });
+
+      branchSel.addEventListener("change", loadShiftsForBranch);
+      shiftSel.addEventListener("change", loadShiftData);
+
+      function loadShiftsForBranch() {
+        const branchId = parseInt(branchSel.value, 10);
+        shiftSel.innerHTML = '<option value="">— اختر الوردية —</option>';
+        const branchShifts = openShifts.filter((s) => s.branchId === branchId);
+        branchShifts.forEach((s) => {
+          const opt = document.createElement("option");
+          opt.value = String(s.id);
+          opt.textContent = `${s.shiftType} - ${s.worker} (بدأت ${s.startedAt})`;
+          shiftSel.appendChild(opt);
+        });
+        closeForm.style.display = "none";
+        closeEmpty.style.display = "block";
+      }
+
+      function loadShiftData() {
+        const shiftId = parseInt(shiftSel.value, 10);
+        if (!shiftId) {
+          closeForm.style.display = "none";
+          closeEmpty.style.display = "block";
+          return;
+        }
+        const shift = openShifts.find((s) => s.id === shiftId);
+        if (!shift) return;
+        closeForm.style.display = "block";
+        closeEmpty.style.display = "none";
+
+        document.getElementById("close-shift-info").textContent = `${branchName(shift.branchId)} · وردية ${shift.shiftType} · ${shift.worker} · بدأت ${shift.startedAt}`;
+        document.getElementById("f-custody-start").value = shift.custodyAmount;
+        document.getElementById("f-custody-used").value = 0;
+        document.getElementById("f-custody-end").value = shift.custodyAmount;
+        document.getElementById("f-cash").value = 0;
+        document.getElementById("f-network").value = 0;
+        document.getElementById("f-out").value = 0;
+        document.getElementById("f-actual").value = shift.openingBalance;
+        document.getElementById("f-notes").value = "";
+
+        recalculate(shift);
+      }
+
+      ["f-cash", "f-network", "f-out", "f-custody-used", "f-actual"].forEach((id) => {
+        document.getElementById(id).addEventListener("input", () => {
+          const shift = openShifts.find((s) => s.id === parseInt(shiftSel.value, 10));
+          if (shift) recalculate(shift);
+        });
+      });
+
+      function recalculate(shift) {
+        const cash = parseFloat(document.getElementById("f-cash").value) || 0;
+        const network = parseFloat(document.getElementById("f-network").value) || 0;
+        const out = parseFloat(document.getElementById("f-out").value) || 0;
+        const custodyUsed = parseFloat(document.getElementById("f-custody-used").value) || 0;
+        const custodyEnd = (parseFloat(document.getElementById("f-custody-start").value) || 0) - custodyUsed;
+        const actual = parseFloat(document.getElementById("f-actual").value) || 0;
+
+        document.getElementById("f-custody-end").value = Math.max(0, custodyEnd).toFixed(2);
+
+        // Expected cash in drawer = opening + cash sales + custody start - cash out
+        const expected = shift.openingBalance + cash - out;
+        document.getElementById("f-expected").value = expected.toFixed(2);
+
+        // Difference
+        const diff = actual - expected;
+        const treasuryAmount = actual; // ما تم عدّه فعلاً يذهب للخزينة
+
+        document.getElementById("flow-cash").textContent = ui.formatCurrency(cash, "ر.س");
+        document.getElementById("flow-treasury").textContent = ui.formatCurrency(treasuryAmount, "ر.س");
+
+        // Summary
+        const summaryBox = document.getElementById("summary-box");
+        let summary = "";
+        if (diff === 0) {
+          summary = `<div class="alert-success">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>مطابق تماماً — لا فرق بين النقد المتوقع والفعلي.</span>
+          </div>`;
+        } else if (diff > 0) {
+          summary = `<div class="alert-info">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span>زيادة في الصندوق بمقدار <strong>${ui.formatCurrency(diff, "ر.س")}</strong> — تُضاف للخزينة.</span>
+          </div>`;
+        } else {
+          summary = `<div class="alert-warning">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            <span>عجز بمقدار <strong>${ui.formatCurrency(Math.abs(diff), "ر.س")}</strong> — يجب التنويه في الملاحظات.</span>
+          </div>`;
+        }
+        summaryBox.innerHTML = summary;
+      }
+
+      document.querySelector("[data-action='reset-form']")?.addEventListener("click", () => {
+        branchSel.value = "";
+        shiftSel.innerHTML = '<option value="">— اختر الوردية —</option>';
+        closeForm.style.display = "none";
+        closeEmpty.style.display = "block";
+      });
+
+      document.querySelector("[data-action='submit-close']")?.addEventListener("click", () => {
+        const shiftId = parseInt(shiftSel.value, 10);
+        if (!shiftId) return;
+        const shift = openShifts.find((s) => s.id === shiftId);
+        if (!shift) return;
+
+        const cash = parseFloat(document.getElementById("f-cash").value) || 0;
+        const network = parseFloat(document.getElementById("f-network").value) || 0;
+        const out = parseFloat(document.getElementById("f-out").value) || 0;
+        const custodyUsed = parseFloat(document.getElementById("f-custody-used").value) || 0;
+        const custodyEnd = (parseFloat(document.getElementById("f-custody-start").value) || 0) - custodyUsed;
+        const actual = parseFloat(document.getElementById("f-actual").value) || 0;
+        const expected = shift.openingBalance + cash - out;
+        const diff = actual - expected;
+
+        // إضافة للإقفالات
+        closings.unshift({
+          id: closings.length + 1,
+          branchId: shift.branchId,
+          shiftType: shift.shiftType,
+          date: "2026-10-07",
+          worker: shift.worker,
+          closedBy: "المدير العام",
+          openingBalance: shift.openingBalance,
+          cashSales: cash,
+          networkSales: network,
+          cashOut: out,
+          custodyStart: parseFloat(document.getElementById("f-custody-start").value) || 0,
+          custodyUsed,
+          custodyEnd: Math.max(0, custodyEnd),
+          actualCash: actual,
+          expectedCash: expected,
+          difference: diff,
+          transferredToTreasury: actual,
+          treasuryConfirmed: true,
+          closedAt: new Date().toTimeString().slice(0, 5),
+          notes: document.getElementById("f-notes").value || ""
+        });
+
+        // إضافة للخزينة (الكاش فقط)
+        treasury.unshift({
+          id: treasury.length + 1,
+          branchId: shift.branchId,
+          date: "2026-10-07",
+          amount: actual,
+          type: "deposit",
+          source: `إقفال وردية ${shift.shiftType}`,
+          status: "confirmed"
+        });
+
+        // حذف الوردية من المفتوحة
+        const idx = openShifts.findIndex((s) => s.id === shiftId);
+        if (idx > -1) openShifts.splice(idx, 1);
+
+        // إعادة عرض
+        alert("✅ تم إقفال الوردية وتحويل " + ui.formatCurrency(actual, "ر.س") + " للخزينة المركزية");
+        window.location.reload();
+      });
+
+      /* ---------- Custody table ---------- */
+      document.getElementById("custody-tbody").innerHTML = custody.map((c) => `
+        <tr>
+          <td>${branchName(c.branchId)}</td>
+          <td>${c.manager}</td>
+          <td>${c.toWorker}</td>
+          <td><span class="table__primary">${ui.formatCurrency(c.amount, "ر.س")}</span></td>
+          <td>${c.purpose}</td>
+          <td>${c.givenAt}</td>
+          <td>${ui.statusBadge(c.status)}</td>
+        </tr>
+      `).join("");
+
+      /* ---------- History table ---------- */
+      const historySel = document.getElementById("history-filter");
+      branches.forEach((b) => {
+        const opt = document.createElement("option");
+        opt.value = String(b.id);
+        opt.textContent = b.name;
+        historySel.appendChild(opt);
+      });
+
+      function renderHistory(filter) {
+        const filtered = filter ? closings.filter((c) => c.branchId === parseInt(filter, 10)) : closings;
+        document.getElementById("history-tbody").innerHTML = filtered.map((c) => `
+          <tr>
+            <td>${c.date}<div class="table__secondary">${c.closedAt}</div></td>
+            <td>${branchName(c.branchId)}</td>
+            <td>${c.shiftType}</td>
+            <td>${c.worker}</td>
+            <td>${ui.formatCurrency(c.cashSales, "ر.س")}</td>
+            <td>${ui.formatCurrency(c.networkSales, "ر.س")}</td>
+            <td style="color: var(--accent-danger);">${ui.formatCurrency(c.cashOut, "ر.س")}</td>
+            <td>${ui.formatCurrency(c.custodyUsed, "ر.س")}</td>
+            <td><span class="table__primary">${ui.formatCurrency(c.transferredToTreasury, "ر.س")}</span></td>
+            <td>${c.difference === 0 ? '<span class="badge badge--success"><span class="badge__dot"></span>مطابق</span>' : c.difference > 0 ? `<span class="badge badge--info">+${ui.formatCurrency(c.difference, "ر.س")}</span>` : `<span class="badge badge--warning">${ui.formatCurrency(c.difference, "ر.س")}</span>`}</td>
+          </tr>
+        `).join("");
+      }
+      historySel.addEventListener("change", () => renderHistory(historySel.value));
+      renderHistory("");
+
+      /* ---------- Treasury table ---------- */
+      document.getElementById("treasury-tbody").innerHTML = treasury.map((t) => `
+        <tr>
+          <td>${t.date}</td>
+          <td>${branchName(t.branchId)}</td>
+          <td><span class="table__primary">${ui.formatCurrency(t.amount, "ر.س")}</span></td>
+          <td>${t.source}</td>
+          <td>${ui.statusBadge(t.status)}</td>
+        </tr>
+      `).join("");
+    })();
+  </script>
+</body>
+</html>
