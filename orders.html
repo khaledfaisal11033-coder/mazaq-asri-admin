@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F9FAFC" />
+  <title>الطلبات · شركة المذاق العصري</title>
+  <link rel="icon" type="image/svg+xml" href="./logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Tajawal:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./dashboard.css" />
+</head>
+<body>
+  <div class="sidebar-backdrop"></div>
+  <div class="admin-shell">
+    <aside class="sidebar">
+      <div class="sidebar__brand">
+        <img src="./logo.svg" alt="" />
+        <div class="sidebar__brand-text">
+          <span class="sidebar__brand-title">المذاق العصري</span>
+          <span class="sidebar__brand-subtitle">لوحة الإدارة</span>
+        </div>
+      </div>
+      <div class="sidebar__section">
+        <div class="sidebar__heading">القائمة الرئيسية</div>
+        <ul class="sidebar__nav">
+          <li><a class="nav-item" href="./dashboard.html" data-nav="dashboard.html">
+            <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+            لوحة التحكم
+          </a></li>
+          <li><a class="nav-item" href="./orders.html" data-nav="orders.html">
+            <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            الطلبات
+          </a></li>
+          <li><a class="nav-item" href="./reports.html" data-nav="reports.html">
+            <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            المالية والتقارير
+          </a></li>
+          <li><a class="nav-item" href="./menu.html" data-nav="menu.html">
+            <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg>
+            المنيو
+          </a></li>
+          <li><a class="nav-item" href="./inventory.html" data-nav="inventory.html">
+            <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            المخزون
+          </a></li>
+          <li><a class="nav-item" href="./staff.html" data-nav="staff.html">
+            <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            الموظفين
+          </a></li>
+        </ul>
+      </div>
+      <div class="sidebar__section">
+        <div class="sidebar__heading">النظام</div>
+        <ul class="sidebar__nav">
+          <li><a class="nav-item" href="./settings.html" data-nav="settings.html">
+            <svg class="nav-item__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/></svg>
+            الإعدادات
+          </a></li>
+        </ul>
+      </div>
+      <div class="sidebar__footer">
+        <div class="sidebar__user">
+          <div class="sidebar__user-avatar" data-user-avatar>م</div>
+          <div class="sidebar__user-info">
+            <div class="sidebar__user-name" data-user-name>المستخدم</div>
+            <div class="sidebar__user-role" data-user-role>مدير</div>
+          </div>
+          <button class="sidebar__logout" data-action="logout" title="تسجيل الخروج">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <header class="topbar">
+      <button class="topbar__menu-btn" data-action="toggle-menu" aria-label="القائمة">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div>
+        <h1 class="topbar__page-title">إدارة الطلبات</h1>
+        <div class="topbar__page-subtitle">عرض وتتبع جميع طلبات العملاء</div>
+      </div>
+      <div class="topbar__search">
+        <svg class="topbar__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" placeholder="ابحث برقم الطلب أو اسم العميل…" id="order-search" />
+      </div>
+      <div class="topbar__actions">
+        <button class="btn btn--primary" data-action="new-order">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          طلب جديد
+        </button>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="stats" style="grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));">
+        <article class="stat-card">
+          <div class="stat-card__label">إجمالي الطلبات</div>
+          <div class="stat-card__value" data-bind="total-orders">—</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-card__label">قيد التحضير</div>
+          <div class="stat-card__value" data-bind="preparing-orders">—</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-card__label">مكتملة اليوم</div>
+          <div class="stat-card__value" data-bind="completed-orders">—</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-card__label">ملغية اليوم</div>
+          <div class="stat-card__value" data-bind="cancelled-orders">—</div>
+        </article>
+      </section>
+
+      <div class="filterbar">
+        <div class="filterbar__search">
+          <svg class="filterbar__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" placeholder="بحث…" id="filter-search" />
+        </div>
+        <select class="select" id="filter-status">
+          <option value="">جميع الحالات</option>
+          <option value="completed">مكتمل</option>
+          <option value="preparing">قيد التحضير</option>
+          <option value="cancelled">ملغي</option>
+          <option value="refunded">مسترد</option>
+        </select>
+        <select class="select" id="filter-type">
+          <option value="">كل الأنواع</option>
+          <option value="محلي">محلي</option>
+          <option value="توصيل">توصيل</option>
+        </select>
+        <select class="select" id="filter-date">
+          <option value="">كل الفترات</option>
+          <option value="2026-10-07">اليوم</option>
+          <option value="2026-10-06">الأمس</option>
+        </select>
+        <button class="btn btn--secondary btn--sm" id="reset-filters">إعادة ضبط</button>
+      </div>
+
+      <div class="card">
+        <div class="card__header">
+          <div>
+            <h3 class="card__title">قائمة الطلبات</h3>
+            <p class="card__subtitle">عرض <span data-bind="visible-count">—</span> من <span data-bind="total-count">—</span> طلب</p>
+          </div>
+        </div>
+        <div class="card__body card__body--flush">
+          <div class="table-wrap">
+            <table class="table" id="orders-table">
+              <thead>
+                <tr>
+                  <th>رقم الطلب</th>
+                  <th>العميل</th>
+                  <th>العناصر</th>
+                  <th>الإجمالي</th>
+                  <th>النوع</th>
+                  <th>الدفع</th>
+                  <th>الحالة</th>
+                  <th>الوقت</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody id="orders-tbody">
+                <tr><td colspan="9" style="text-align:center; padding: 32px; color: var(--text-muted)">جاري التحميل…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="footer__inner">
+          <span class="footer__version">الإصدار <span id="app-version">v1.0.0</span></span>
+          <span class="footer__sep">·</span>
+          <a class="footer__domain" href="https://modrtn-taste-company.pages.dev" target="_blank" rel="noopener">modrtn-taste-company.pages.dev</a>
+        </div>
+        <div class="footer__copy">© ٢٠٢٦ شركة المذاق العصري — جميع الحقوق محفوظة.</div>
+      </footer>
+    </main>
+  </div>
+
+  <script src="./config.js"></script>
+  <script src="./mock-data.js"></script>
+  <script src="./dashboard.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      const data = window.MOCK_DATA;
+      const ui = window.UI;
+      const orders = data.orders;
+
+      // إحصائيات
+      const today = "2026-10-07";
+      const todayOrders = orders.filter((o) => o.date === today);
+      document.querySelector("[data-bind='total-orders']").textContent = ui.formatNumber(orders.length);
+      document.querySelector("[data-bind='preparing-orders']").textContent = ui.formatNumber(orders.filter((o) => o.status === "preparing").length);
+      document.querySelector("[data-bind='completed-orders']").textContent = ui.formatNumber(todayOrders.filter((o) => o.status === "completed").length);
+      document.querySelector("[data-bind='cancelled-orders']").textContent = ui.formatNumber(todayOrders.filter((o) => o.status === "cancelled" || o.status === "refunded").length);
+
+      function render(filtered) {
+        const tbody = document.getElementById("orders-tbody");
+        if (filtered.length === 0) {
+          tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding: 40px; color: var(--text-muted)">لا توجد طلبات مطابقة</td></tr>`;
+        } else {
+          tbody.innerHTML = filtered.map((o) => `
+            <tr>
+              <td><div class="table__primary">${o.id}</div><div class="table__secondary">${o.date}</div></td>
+              <td><div class="table__primary">${o.customer}</div><div class="table__secondary">${o.phone}</div></td>
+              <td>${ui.formatNumber(o.items)}</td>
+              <td><div class="table__primary">${ui.formatCurrency(o.total, 'ر.س')}</div></td>
+              <td>${o.type}</td>
+              <td>${o.payment}</td>
+              <td>${ui.statusBadge(o.status)}</td>
+              <td>${o.time}</td>
+              <td>
+                <div class="table__actions">
+                  <button class="icon-btn" title="عرض التفاصيل">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          `).join("");
+        }
+        document.querySelector("[data-bind='visible-count']").textContent = ui.formatNumber(filtered.length);
+        document.querySelector("[data-bind='total-count']").textContent = ui.formatNumber(orders.length);
+      }
+
+      function applyFilters() {
+        const search = (document.getElementById("filter-search").value || "").toLowerCase().trim();
+        const status = document.getElementById("filter-status").value;
+        const type = document.getElementById("filter-type").value;
+        const date = document.getElementById("filter-date").value;
+
+        const filtered = orders.filter((o) => {
+          if (search && !(o.id.toLowerCase().includes(search) || o.customer.toLowerCase().includes(search) || o.phone.includes(search))) return false;
+          if (status && o.status !== status) return false;
+          if (type && o.type !== type) return false;
+          if (date && o.date !== date) return false;
+          return true;
+        });
+        render(filtered);
+      }
+
+      document.getElementById("filter-search").addEventListener("input", applyFilters);
+      document.getElementById("filter-status").addEventListener("change", applyFilters);
+      document.getElementById("filter-type").addEventListener("change", applyFilters);
+      document.getElementById("filter-date").addEventListener("change", applyFilters);
+      document.getElementById("reset-filters").addEventListener("click", () => {
+        document.getElementById("filter-search").value = "";
+        document.getElementById("filter-status").value = "";
+        document.getElementById("filter-type").value = "";
+        document.getElementById("filter-date").value = "";
+        applyFilters();
+      });
+
+      render(orders);
+    })();
+  </script>
+</body>
+</html>
