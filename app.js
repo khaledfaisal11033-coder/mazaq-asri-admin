@@ -163,7 +163,8 @@
 
     return {
       token,
-      redirect: "./dashboard.html",
+      // لا توجد dashboard.html في هذا المشروع؛ صفحة الإقفال هي لوحة العمل الحالية.
+      redirect: "./closing.html",
       profile: {
         username: matched.username,
         role: matched.role || "مدير",
